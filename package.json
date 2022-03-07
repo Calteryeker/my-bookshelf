@@ -1,0 +1,24 @@
+{
+  "name": "my-bookshelf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./backend/server.js",
+    "dev": "nodemon ./backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Calteryeker/my-bookshelf.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Calteryeker/my-bookshelf/issues"
+  },
+  "homepage": "https://github.com/Calteryeker/my-bookshelf#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
