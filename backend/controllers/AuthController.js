@@ -30,7 +30,7 @@ module.exports = {
         }
         return response.status(409).send('Validation failed: Login is not unique');
       } else {
-        return response.send(userData);
+        return response.status(201).send('Usuario cadastrado');
       }
     });
 
