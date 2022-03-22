@@ -1,16 +1,20 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
+const authConfig = require('../config/auth.json');
+const { update } = require('../models/User');
+
 module.exports = {
-  async store(request, response) {
+  async signup(request, response) {
 
     const { login, senha, nome, email, data_nascimento, lista_livros } = request.body;
     const senhaHash = bcrypt.hashSync(senha, 10);
     const userData = request.body;
 
     //estudar moment, verificar melhor forma de armazenar data
-    console.log(moment(data_nascimento, "DD/MM/YYYY"));
+    //console.log(moment(data_nascimento, "DD/MM/YYYY"));
 
 
     User.collection.insertOne({
@@ -31,5 +35,20 @@ module.exports = {
       }
     });
 
+  },
+
+  //update user
+  async update(req, res){
+
+  },
+
+  //delete user
+  async delete(req, res){
+    await User.deleteOne({_id: req.userId});
+
+    if(await User.countDocuments({_id: req.userId}) != 0)
+        return res.status(500).send({userId: req.userId, error:'Error: Cannot delete user'});
+
+    res.status(200).send({userId: req.userId, msg:'Success: User deleted!'});
   }
 };
