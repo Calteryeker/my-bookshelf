@@ -37,12 +37,12 @@ module.exports = {
 
   },
 
-  //delete user
+  //update user
   async update(req, res){
 
   },
 
-  //update user
+  //delete user
   async delete(req, res){
     await User.deleteOne({_id: req.userId});
 
