@@ -3,7 +3,7 @@ const UserController = require('./controllers/UserController');
 const AuthController = require('./controllers/AuthController');
 const routes = Router();
 
-const AuthMiddleware = require('./middleware/auth.js')
+const AuthMiddleware = require('./middleware/auth.js');
 
 //Rota de cadastro de usuário
 routes.post('/signup', UserController.signup);

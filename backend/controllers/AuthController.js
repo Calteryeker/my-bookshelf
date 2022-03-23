@@ -25,6 +25,6 @@ module.exports = {
       expiresIn: 86400,
     });
 
-    res.send({user, token});
+    res.status(200).send({user, token});
   }
 };
