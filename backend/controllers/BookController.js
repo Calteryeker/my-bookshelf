@@ -25,7 +25,7 @@ module.exports = {
     },
 
     async delete(req, res){
-        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.body.bookId}}})
+        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}})
         .then((result, err) => {
             if(result)
                 return res.status(200).send('Success: Book deleted!');
