@@ -3,9 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
-const authConfig = require('../config/auth.json');
-const { update } = require('../models/User');
-
 module.exports = {
   async signup(req, res) {
 
@@ -45,7 +42,7 @@ module.exports = {
       nome: nome, email: email, data_nascimento: moment(data_nascimento, "DD/MM/YYYY")._d}, 
       (err, result) => {
         if(err)
-          return res.status(400).send({err: err, msg: 'Error: Fail updating user!'});
+          return res.status(500).send({err: err, msg: 'Error: Fail updating user!'});
 
         return res.status(200).send({data: req.body, msg : 'Success: User updated!'});
       });
