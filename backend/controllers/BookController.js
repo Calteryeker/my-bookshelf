@@ -17,7 +17,15 @@ module.exports = {
     },
 
     async view(req, res){
-
+        const user = await User.findOne({_id: req.userId});
+        searchedBook = user.lista_livros.find(livro => livro._id == req.params.id);
+        
+        if(searchedBook != undefined)
+            return res.status(200).send(searchedBook);
+        else{
+            return res.status(400).send("Error: Book doesn't exist!");
+        }
+        
     },
 
     async edit(req, res){

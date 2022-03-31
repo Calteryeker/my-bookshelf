@@ -7,10 +7,10 @@ module.exports = {
   async login(req, res){
       
     const {loginEmail, senha} = req.body;
-    var user = await User.findOne({login: loginEmail}).select('+senha');
+    var user = await User.findOne({login: loginEmail}).select('+senha -lista_livros');
 
     if(!user)
-      user = await User.findOne({email: loginEmail}).select('+senha');
+      user = await User.findOne({email: loginEmail}).select('+senha -lista_livros');
 
     if(!user)
       return res.status(400).send('Error: User not found!');

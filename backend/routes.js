@@ -22,10 +22,10 @@ routes.delete('/u/delete', AuthMiddleware, UserController.delete);
 //Rotas para controle de livros
 //Rota para criar um livro
 routes.post('/b/create', AuthMiddleware, BookController.create);
-/*
+
 //Rota para visualizar infos do livro
 routes.get('/b/:id/view', AuthMiddleware, BookController.view);
-
+/*
 //Rota para alterar informações de um livro
 routes.patch('/b/:id/edit', AuthMiddleware, BookController.edit);
 */
