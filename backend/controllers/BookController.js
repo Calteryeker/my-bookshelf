@@ -21,7 +21,7 @@ module.exports = {
         searchedBook = user.lista_livros.find(livro => livro._id == req.params.id);
         
         if(searchedBook != undefined)
-            return res.status(200).send(searchedBook);
+            return res.status(200).send({book: searchedBook, msg: "Success: Book found!"});
         else{
             return res.status(400).send("Error: Book doesn't exist!");
         }
@@ -29,7 +29,18 @@ module.exports = {
     },
 
     async edit(req, res){
+        const {titulo, autor, imagem, ano_publicacao, descricao, lista_generos, avaliacao} = req.body;
+        await User.updateOne({_id: req.userId, "lista_livros._id": req.params.id},
+         {$set: {"lista_livros.$.titulo": titulo,
+            "lista_livros.$.autor": autor,
+            "lista_livros.$.imagem": imagem, 
+            "lista_livros.$.ano_publicacao": ano_publicacao,
+            "lista_livros.$.descricao": descricao, 
+            "lista_livros.$.lista_generos": lista_generos,
+            "lista_livros.$.avalicacao": avaliacao}}).catch(err => {
+            return res.status(500).send("Error: Failed to update the book!")});
 
+        res.status(200).send("Success: Book updated!");
     },
 
     async delete(req, res){
