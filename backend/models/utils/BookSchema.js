@@ -17,7 +17,7 @@ const BookSchema = new mongoose.Schema({
   imagem: String,
   ano_publicacao: String,
   descricao: String,
-  lista_generos: String,
+  lista_generos: [String],
   avalicacao: Number
 });
 
