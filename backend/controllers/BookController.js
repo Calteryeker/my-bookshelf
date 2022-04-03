@@ -18,12 +18,12 @@ module.exports = {
 
     async view(req, res){
         const user = await User.findOne({_id: req.userId});
-        searchedBook = user.lista_livros.find(livro => livro._id == req.params.id);
+        const searchedBook = user.lista_livros.find(livro => livro._id == req.params.id);
         
         if(searchedBook != undefined)
             return res.status(200).send({book: searchedBook, msg: "Success: Book found!"});
         else{
-            return res.status(400).send("Error: Book doesn't exist!");
+            return res.status(404).send("Error: Book doesn't exist!");
         }
         
     },
@@ -45,12 +45,10 @@ module.exports = {
 
     async delete(req, res){
         await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}})
-        .then((result, err) => {
-            if(result)
-                return res.status(200).send('Success: Book deleted!');
-
+        .catch((err) => {
             return res.status(500).send({err: err, msg:'Error: Server failed to delete the book!'});
+            
         });
-
+        res.status(200).send('Success: Book deleted!');
     },
 };
