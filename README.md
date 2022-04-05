@@ -1,5 +1,5 @@
 <h1 align = "center" >
-  <img alt="mybookshelf" width = "40px" src="https://cdn-icons.flaticon.com/png/512/3145/premium/3145765.png?token=exp=1647113909~hmac=9aacc88037c6d2f31378819ec7359987">
+  <img alt="mybookshelf" width = "40px" src="https://cdn-icons-png.flaticon.com/512/864/864685.png">
   MyBookShelf - Library System
 </h1>
 <table align = "center" >
