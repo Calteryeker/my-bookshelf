@@ -8,6 +8,7 @@
     <a href="https://github.com/isaqueijs">Isaque João/ </a>
     <a href="https://github.com/jhonsidney">Jhon Sidney/ </a>
     <a href="https://github.com/Calteryeker">Claudio Marcio</a>
+    <a href="https://github.com/98PASS">Pedro Antonio</a>
   </th>
  
 </table>
