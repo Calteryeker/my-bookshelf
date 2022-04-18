@@ -11,4 +11,4 @@ app.use(express.json());
 app.use(routes);
 
 //inicia o servidor
-app.listen(3000);
+app.listen(3030);
