@@ -56,6 +56,18 @@ module.exports = {
     if(await User.countDocuments({_id: req.userId}) != 0)
         return res.status(500).send({userId: req.userId, error:'Error: Cannot delete user!'});
 
-    res.status(200).send({userId: req.userId, msg:'Success: User deleted!'});
+    return res.status(200).send({userId: req.userId, msg:'Success: User deleted!'});
+  },
+
+  //recover user
+  async recUser(req, res){
+    const userRecovered = await User.findById({_id: req.userId}).select('-lista_livros');
+
+    if(userRecovered){
+      return res.status(200).send({user: userRecovered});
+    }
+      
+    
+      return res.status(404).send("Error: User not found!")
   }
 };

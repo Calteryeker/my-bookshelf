@@ -3,17 +3,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
-import Axios from "axios";
+import { useContext } from "react";
+import { AuthContext }  from "../contexts/AuthContext";
 
 export default function Login() {
+    const { signIn } = useContext(AuthContext);
+
     const handleClickLogin = async (dados) => {
-        console.log(dados)
-        await Axios.post("http://localhost:3030/login", {
-            loginEmail: dados.username,
-            senha: dados.password
-        }).then((response) => {
-            console.log(response)
-        });
+        await signIn(dados);
     };
 
     const validationLogin = yup.object().shape({
@@ -22,7 +19,10 @@ export default function Login() {
     });
 
     return (
-        <>
+        <>  
+            <Head>
+                <title>MyBookshelf | Login</title>
+            </Head>
             <Navbar />
             <div className="image-bg">
                 <Formik initialValues={{}} onSubmit={handleClickLogin} validationSchema={validationLogin}>
