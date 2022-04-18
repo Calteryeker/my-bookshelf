@@ -1,6 +1,7 @@
 import { parseCookies } from "nookies"
 import { useContext } from "react"
 import { AuthContext, AuthProvider } from "../../contexts/AuthContext"
+import Head from "next/head"
 
 export default function Index() {
   const { user } = useContext(AuthContext)
