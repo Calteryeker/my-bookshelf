@@ -70,7 +70,7 @@ module.exports = {
 
   //recover user
   async recUser(req, res){
-    const userRecovered = await User.findById({_id: req.userId}).select('-lista_livros');
+    const userRecovered = await User.findById(req.userId).select('-lista_livros');
 
     if(userRecovered){
       return res.status(200).send({user: userRecovered});

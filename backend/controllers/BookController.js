@@ -53,6 +53,35 @@ module.exports = {
     },
 
     async getBooks(req, res){
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
+        const startIndex = page > 0 ? (page - 1) * limit : 0;
+        const endIndex = page == 0 ? limit : page * limit;
 
-    }
+        await User.findById(req.userId, {lista_livros: {$slice :[startIndex, endIndex]}})
+        .then(result => {
+            const resPage = {};
+
+            if(limit == Object.keys(result.lista_livros).length){
+                resPage.next = {
+                    page: page+1,
+                    limit: limit,
+                };
+            }
+    
+            if(page > 0){
+                resPage.previous = {
+                    page: page-1,
+                    limit: limit,
+                }
+            }
+    
+            resPage.books = result.lista_livros;
+    
+            return res.status(200).send(resPage);
+        })
+        .catch(err => {
+            return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
+        });
+    },    
 };
