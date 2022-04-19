@@ -35,48 +35,7 @@ routes.put('/b/:id/edit', AuthMiddleware, BookController.edit);
 //Rota para deletar um livro do sistema
 routes.delete('/b/:id/delete', AuthMiddleware, BookController.delete);
 
-//Rotas para entregar o frontend
-/*
-//Rota Página Index
-routes.get('/');
+//Rota para recuperar os livros do usuário
+routes.get('/b', AuthMiddleware, BookController.getBooks);
 
-//Rota Página Cadastro
-routes.get("/signup");
-
-//Rota Página de Login
-routes.get('/login');
-
-//Rota Página de Recuperação de Senha
-routes.get('/recpass');
-
-//Rota Página Home
-routes.get('/home', AuthMiddleware, BookController.load);
-
-//Rota Página Profile
-routes.get('/u/profile', AuthMiddleware, UserController.userInfo);
-
-//Rota Página Edit Profile
-routes.get('/u/profile/edit', AuthMiddleware);
-
-//Rota Página Delete Profile
-routes.get('/u/profile/delete', AuthMiddleware);
-
-//Rota Página de Criaçao de Livro
-routes.get('/b/create', AuthMiddleware);
-
-//Rota Página de Ediçao de Livro
-routes.get('/b/:id/edit', AuthMiddleware);
-
-//Rota Página de Deletar Livro
-routes.get('/b/:id/delete', AuthMiddleware);
-
-//Rota Página Ranking
-routes.get('/ranking', AuthMiddleware);
-
-//Rota Página Recomendações
-routes.get('/recommendention', AuthMiddleware);
-
-//Rota Página de Suporte
-routes.get('/support');
-*/
 module.exports = routes;

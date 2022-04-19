@@ -40,7 +40,7 @@ module.exports = {
             "lista_livros.$.avalicacao": avaliacao}}).catch(err => {
             return res.status(500).send("Error: Failed to update the book!")});
 
-        res.status(200).send("Success: Book updated!");
+        return res.status(200).send("Success: Book updated!");
     },
 
     async delete(req, res){
@@ -49,6 +49,10 @@ module.exports = {
             return res.status(500).send({err: err, msg:'Error: Server failed to delete the book!'});
             
         });
-        res.status(200).send('Success: Book deleted!');
+        return res.status(200).send('Success: Book deleted!');
     },
+
+    async getBooks(req, res){
+
+    }
 };

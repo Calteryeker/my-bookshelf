@@ -36,7 +36,7 @@ export default function Login() {
                         </div>
                         <div className="login-form-group">
                             <label className="login-form-field-type">Senha:
-                                <Field name="password" className="form-field"  placeholder="Digite sua senha"/>
+                                <Field type="password" name="password" className="form-field"  placeholder="Digite sua senha"/>
                                 <ErrorMessage component="span" name="password" className="form-error"/>
                             </label>
                         </div>
