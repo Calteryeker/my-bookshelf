@@ -1,6 +1,6 @@
 import { parseCookies } from "nookies"
 import { useContext } from "react"
-import { AuthContext, AuthProvider } from "../../contexts/AuthContext"
+import { AuthContext } from "../../contexts/AuthContext"
 import Head from "next/head"
 
 export default function Index() {
@@ -11,7 +11,7 @@ export default function Index() {
       <Head>
         <title>MyBookshelf | Home</title>
       </Head>
-      <h1>Welcome {user.nome}</h1>
+      <h1>Welcome {user ? user.nome : ''}</h1>
     </>
   )
 }

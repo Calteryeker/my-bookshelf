@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies } from 'nookies';
 import Router from "next/router";
 import Axios from "axios";
+import { recoverUser } from "../services/auth";
 
 export const AuthContext = createContext({
     user: null,
@@ -15,21 +16,14 @@ export function AuthProvider({ children }) {
     const isAuthenticated = !!user;
 
     useEffect(() => {
-        const {'mybookshelf-token': token} = parseCookies();
+        const { 'mybookshelf-token': token } = parseCookies()
 
         if(token){
-            async () => 
-            await Axios.get("http://localhost:3030/user", {
-                headers: {
-                    'Authorization' : `Bearer ${token}`,
-                }
-            }).then(response => {
-                const { user } = response.data;
-                setUser(user);
-                  
-            });
+            recoverUser(token).then(recoveredUser => {
+                setUser(recoveredUser);
+            })
         }
-
+        
     }, []);
 
     async function signIn(dados){
