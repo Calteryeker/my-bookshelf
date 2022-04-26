@@ -44,12 +44,12 @@ export default function Signup() {
   }
 
   return (
-    <>
+    <div className="flex flex-col overflow-y-scroll items-stretch justify-between bg-romantic-1 min-h-screen">
       <Head>
         <title>MyBookshelf | Cadastro</title>
       </Head>
       <Navbar />
-      <div className="image-bg">
+      <div className="flex flex-col items-center">
         <Formik initialValues={{}} onSubmit={handleClickSignUp} validationSchema={validationSignup}>
           <Form className="signup-form">
             <h2 className="signup-form-title">Cadastro</h2>
@@ -97,6 +97,6 @@ export default function Signup() {
         </Formik>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
