@@ -6,7 +6,7 @@ module.exports = {
 
         await User.updateOne({_id: req.userId}, {$addToSet: {lista_livros: {titulo: titulo, autor: autor,
             imagem: imagem, ano_publicacao: ano_publicacao,descricao: descricao, lista_generos: lista_generos,
-            avalicacao: avaliacao}}}).then((result, err) => {
+            avaliacao: avaliacao}}}).then((result, err) => {
                 if(result)
                     return res.status(200).send('Success: New book created!');
 
@@ -37,10 +37,10 @@ module.exports = {
             "lista_livros.$.ano_publicacao": ano_publicacao,
             "lista_livros.$.descricao": descricao, 
             "lista_livros.$.lista_generos": lista_generos,
-            "lista_livros.$.avalicacao": avaliacao}}).catch(err => {
+            "lista_livros.$.avaliacao": avaliacao}}).catch(err => {
             return res.status(500).send("Error: Failed to update the book!")});
 
-        res.status(200).send("Success: Book updated!");
+        return res.status(200).send("Success: Book updated!");
     },
 
     async delete(req, res){
@@ -49,6 +49,47 @@ module.exports = {
             return res.status(500).send({err: err, msg:'Error: Server failed to delete the book!'});
             
         });
-        res.status(200).send('Success: Book deleted!');
+        return res.status(200).send('Success: Book deleted!');
     },
+
+    async getBooks(req, res){
+        const page = parseInt(req.query.page);
+        const startIndex = page <= 1 ? 0 : (page - 1) * 1000;
+        const endIndex = startIndex == 0 ? 1000 : page * 1000;
+
+        var totalBooks, totalPages;
+
+        await User.findById(req.userId).then(result => {
+            totalBooks = Object.keys((result.lista_livros)).length;
+            totalPages = Math.ceil(totalBooks/1000);
+        }).catch(async err =>{
+            return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
+        });
+        
+
+        if(page <= totalPages){
+            await User.findById(req.userId, {lista_livros: {$slice :[startIndex, endIndex]}})
+            .then(async result => { 
+                const resPage = {
+                    _meta:{
+                        success: true,
+                        currentPage: page,
+                        totalBooks: totalBooks,
+                        totalPages: totalPages,
+                        perPage: 1000,
+                    }
+                };
+                
+                resPage.books = result.lista_livros;
+        
+                return res.status(200).send(resPage);
+            })
+            .catch(err => {
+                return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
+            });
+        }
+        else{
+            return res.status(400).send({err: 'Error: Bad Page Resquest!'});
+        }
+    },    
 };

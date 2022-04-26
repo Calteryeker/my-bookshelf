@@ -35,8 +35,17 @@ module.exports = {
 
   //update user
   async update(req, res){
-    const { senha, nome, email, data_nascimento } = req.body;
-    const senhaHash = bcrypt.hashSync(senha,10);
+    const { senhaAntiga, novaSenha, nome, email, data_nascimento } = req.body;
+    var senhaHash;
+
+    if(novaSenha){
+      const userRecovered = await User.findById({_id: req.userId}).select('+senha');
+      if(await bcrypt.compare(senhaAntiga, userRecovered.senha))
+        senhaHash = await bcrypt.hashSync(novaSenha,10);
+      else{
+        return res.status(401).send({err: 'Error: Password doesnt match!'})
+      }
+    }
 
     User.updateOne({_id: req.userId}, {senha: senhaHash, 
       nome: nome, email: email, data_nascimento: moment(data_nascimento, "DD/MM/YYYY")._d}, 
@@ -56,6 +65,17 @@ module.exports = {
     if(await User.countDocuments({_id: req.userId}) != 0)
         return res.status(500).send({userId: req.userId, error:'Error: Cannot delete user!'});
 
-    res.status(200).send({userId: req.userId, msg:'Success: User deleted!'});
+    return res.status(200).send({userId: req.userId, msg:'Success: User deleted!'});
+  },
+
+  //recover user
+  async recUser(req, res){
+    const userRecovered = await User.findById(req.userId).select('-lista_livros');
+
+    if(userRecovered){
+      return res.status(200).send({user: userRecovered});
+    }
+      
+      return res.status(404).send("Error: User not found!")
   }
 };
