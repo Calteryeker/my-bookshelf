@@ -1,6 +1,8 @@
 import Head from "next/head";
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { parseCookies } from 'nookies';
+
 
 export default function Home() {
   return (
@@ -13,10 +15,10 @@ export default function Home() {
         <h1 className='text-4xl font-bold'>Welcome to MyBookshelf</h1>
       </div>
       <div className="min-h-screen flex items-center justify-around bg-white-900">
-        <h1 className='text-4xl font-bold'>Quem Somos</h1>
+        <h2 className='text-4xl font-bold'>Quem Somos</h2>
       </div>
       <div className="min-h-screen flex items-center justify-around bg-romantic-1">
-        <h1 className='text-4xl font-bold'>Leitores</h1>
+        <h2 className='text-4xl font-bold'>Leitores</h2>
       </div>
       <Footer />
     </div>

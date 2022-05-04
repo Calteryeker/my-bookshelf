@@ -44,12 +44,14 @@ module.exports = {
     },
 
     async delete(req, res){
-        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}})
+        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}}).then(res => {
+            return res.status(200).send('Success: Book deleted!');
+        })
         .catch((err) => {
             return res.status(500).send({err: err, msg:'Error: Server failed to delete the book!'});
             
         });
-        return res.status(200).send('Success: Book deleted!');
+        
     },
 
     async getBooks(req, res){
@@ -66,8 +68,10 @@ module.exports = {
             return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
         });
         
-
-        if(page <= totalPages){
+        if(totalPages == 0){
+            return res.status(200).send({books: []})
+        }
+        else if(page <= totalPages){
             await User.findById(req.userId, {lista_livros: {$slice :[startIndex, endIndex]}})
             .then(async result => { 
                 const resPage = {
@@ -88,7 +92,7 @@ module.exports = {
                 return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
             });
         }
-        else{
+        else {
             return res.status(400).send({err: 'Error: Bad Page Resquest!'});
         }
     },    
