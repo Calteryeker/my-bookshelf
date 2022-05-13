@@ -4,12 +4,22 @@ module.exports = {
     async create(req, res){
         const {titulo, autor, imagem, ano_publicacao, descricao, lista_generos, avaliacao} = req.body;
 
-        await User.updateOne({_id: req.userId}, {$addToSet: {lista_livros: {titulo: titulo, autor: autor,
-            imagem: imagem, ano_publicacao: ano_publicacao,descricao: descricao, lista_generos: lista_generos,
-            avalicacao: avaliacao}}}).then((result, err) => {
-                if(result)
-                    return res.status(200).send('Success: New book created!');
+        await User.updateOne({_id: req.userId}, 
+            {$addToSet: {
+                    lista_livros: {
+                        titulo: titulo, 
+                        autor: autor,
+                        imagem: imagem, 
+                        ano_publicacao: ano_publicacao,
+                        descricao: descricao, 
+                        lista_generos: lista_generos,
+                        avaliacao: avaliacao
+                    }
+                }
+            }).then((result) => {
+                return res.status(200).send('Success: New book created!');
 
+            }).catch(err => {
                 return res.status(500).send({err: err, msg:'Error: Server failed to create a new book!'});
             });
         
@@ -31,57 +41,73 @@ module.exports = {
     async edit(req, res){
         const {titulo, autor, imagem, ano_publicacao, descricao, lista_generos, avaliacao} = req.body;
         await User.updateOne({_id: req.userId, "lista_livros._id": req.params.id},
-         {$set: {"lista_livros.$.titulo": titulo,
-            "lista_livros.$.autor": autor,
-            "lista_livros.$.imagem": imagem, 
-            "lista_livros.$.ano_publicacao": ano_publicacao,
-            "lista_livros.$.descricao": descricao, 
-            "lista_livros.$.lista_generos": lista_generos,
-            "lista_livros.$.avalicacao": avaliacao}}).catch(err => {
+        {
+            $set: {
+                "lista_livros.$.titulo": titulo,
+                "lista_livros.$.autor": autor,
+                "lista_livros.$.imagem": imagem,
+                "lista_livros.$.ano_publicacao": ano_publicacao,
+                "lista_livros.$.descricao": descricao,
+                "lista_livros.$.lista_generos": lista_generos,
+                "lista_livros.$.avaliacao": avaliacao,
+            }
+        }).catch(err => {
             return res.status(500).send("Error: Failed to update the book!")});
 
         return res.status(200).send("Success: Book updated!");
     },
 
     async delete(req, res){
-        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}})
+        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}}).then(res => {
+            return res.status(200).send('Success: Book deleted!');
+        })
         .catch((err) => {
             return res.status(500).send({err: err, msg:'Error: Server failed to delete the book!'});
             
         });
-        return res.status(200).send('Success: Book deleted!');
+        
     },
 
     async getBooks(req, res){
         const page = parseInt(req.query.page);
-        const limit = parseInt(req.query.limit);
-        const startIndex = page > 0 ? (page - 1) * limit : 0;
-        const endIndex = page == 0 ? limit : page * limit;
+        const startIndex = page <= 1 ? 0 : (page - 1) * 1000;
+        const endIndex = startIndex == 0 ? 1000 : page * 1000;
 
-        await User.findById(req.userId, {lista_livros: {$slice :[startIndex, endIndex]}})
-        .then(result => {
-            const resPage = {};
+        var totalBooks, totalPages;
 
-            if(limit == Object.keys(result.lista_livros).length){
-                resPage.next = {
-                    page: page+1,
-                    limit: limit,
-                };
-            }
-    
-            if(page > 0){
-                resPage.previous = {
-                    page: page-1,
-                    limit: limit,
-                }
-            }
-    
-            resPage.books = result.lista_livros;
-    
-            return res.status(200).send(resPage);
-        })
-        .catch(err => {
+        await User.findById(req.userId).then(result => {
+            totalBooks = Object.keys((result.lista_livros)).length;
+            totalPages = Math.ceil(totalBooks/1000);
+        }).catch(async err =>{
             return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
         });
+        
+        if(totalPages == 0){
+            return res.status(200).send({books: []})
+        }
+        else if(page <= totalPages){
+            await User.findById(req.userId, {lista_livros: {$slice :[startIndex, endIndex]}})
+            .then(async result => { 
+                const resPage = {
+                    _meta:{
+                        success: true,
+                        currentPage: page,
+                        totalBooks: totalBooks,
+                        totalPages: totalPages,
+                        perPage: 1000,
+                    }
+                };
+                
+                resPage.books = result.lista_livros;
+        
+                return res.status(200).send(resPage);
+            })
+            .catch(err => {
+                return res.status(500).send({err: err, msg: 'Error: Server failed to get the page!'});
+            });
+        }
+        else {
+            return res.status(400).send({err: 'Error: Bad Page Resquest!'});
+        }
     },    
 };

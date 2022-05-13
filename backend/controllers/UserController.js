@@ -48,12 +48,11 @@ module.exports = {
     }
 
     User.updateOne({_id: req.userId}, {senha: senhaHash, 
-      nome: nome, email: email, data_nascimento: moment(data_nascimento, "DD/MM/YYYY")._d}, 
-      (err, result) => {
-        if(err)
-          return res.status(500).send({err: err, msg: 'Error: Fail updating user!'});
-
-        return res.status(200).send({data: req.body, msg : 'Success: User updated!'});
+      nome: nome, email: email, data_nascimento: moment(data_nascimento, "DD/MM/YYYY")._d})
+      .then( result => {
+        return res.status(200).send({msg : 'Success: User updated!'});
+      }).catch( err => {
+        return res.status(500).send({err: err, msg: 'Error: Fail updating user!'});
       });
 
   },

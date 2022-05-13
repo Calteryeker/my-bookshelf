@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useContext } from "react";
-import { AuthContext }  from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Login() {
     const { signIn } = useContext(AuthContext);
@@ -19,25 +19,25 @@ export default function Login() {
     });
 
     return (
-        <>  
+        <div className="flex flex-col overflow-y-scroll items-stretch justify-between bg-romantic-1 min-h-screen">
             <Head>
                 <title>MyBookshelf | Login</title>
             </Head>
             <Navbar />
-            <div className="image-bg">
+            <div className="flex flex-col items-center">
                 <Formik initialValues={{}} onSubmit={handleClickLogin} validationSchema={validationLogin}>
-                    <Form className="login-form">
+                    <Form >
                         <h2 className="login-form-title">Login</h2>
                         <div className="login-form-group">
                             <label className="login-form-field-type">Username/Email:
-                                <Field name="username" className="form-field"  placeholder="Digite seu username ou email"/>
-                                <ErrorMessage component="span" name="username" className="form-error"/>    
+                                <Field name="username" className="form-field" placeholder="Digite seu username ou email" />
+                                <ErrorMessage component="span" name="username" className="form-error" />
                             </label>
                         </div>
                         <div className="login-form-group">
                             <label className="login-form-field-type">Senha:
-                                <Field type="password" name="password" className="form-field"  placeholder="Digite sua senha"/>
-                                <ErrorMessage component="span" name="password" className="form-error"/>
+                                <Field type="password" name="password" className="form-field" placeholder="Digite sua senha" />
+                                <ErrorMessage component="span" name="password" className="form-error" />
                             </label>
                         </div>
                         <button className="button" type="submit">
@@ -48,7 +48,7 @@ export default function Login() {
                 </Formik>
             </div>
             <Footer />
-        </>
-        
+        </div>
+
     )
 }
