@@ -57,8 +57,6 @@ export default function Index() {
       <h1>Welcome {user ? user.nome : ''}</h1>
       <nav>
         <Link href='/profile/view'><a>Meu Perfil</a></Link>
-        <Link href='/rankings'><a>Rankings</a></Link>
-        <Link href='/recommend'><a>Recomende-me um Livro</a></Link>
         <Link href='/suport'><a>Suporte</a></Link>
         <button className="button" onClick={handleLogout}>Logout</button>
         

@@ -4,12 +4,22 @@ module.exports = {
     async create(req, res){
         const {titulo, autor, imagem, ano_publicacao, descricao, lista_generos, avaliacao} = req.body;
 
-        await User.updateOne({_id: req.userId}, {$addToSet: {lista_livros: {titulo: titulo, autor: autor,
-            imagem: imagem, ano_publicacao: ano_publicacao,descricao: descricao, lista_generos: lista_generos,
-            avaliacao: avaliacao}}}).then((result, err) => {
-                if(result)
-                    return res.status(200).send('Success: New book created!');
+        await User.updateOne({_id: req.userId}, 
+            {$addToSet: {
+                    lista_livros: {
+                        titulo: titulo, 
+                        autor: autor,
+                        imagem: imagem, 
+                        ano_publicacao: ano_publicacao,
+                        descricao: descricao, 
+                        lista_generos: lista_generos,
+                        avaliacao: avaliacao
+                    }
+                }
+            }).then((result) => {
+                return res.status(200).send('Success: New book created!');
 
+            }).catch(err => {
                 return res.status(500).send({err: err, msg:'Error: Server failed to create a new book!'});
             });
         
@@ -31,13 +41,17 @@ module.exports = {
     async edit(req, res){
         const {titulo, autor, imagem, ano_publicacao, descricao, lista_generos, avaliacao} = req.body;
         await User.updateOne({_id: req.userId, "lista_livros._id": req.params.id},
-         {$set: {"lista_livros.$.titulo": titulo,
-            "lista_livros.$.autor": autor,
-            "lista_livros.$.imagem": imagem, 
-            "lista_livros.$.ano_publicacao": ano_publicacao,
-            "lista_livros.$.descricao": descricao, 
-            "lista_livros.$.lista_generos": lista_generos,
-            "lista_livros.$.avaliacao": avaliacao}}).catch(err => {
+        {
+            $set: {
+                "lista_livros.$.titulo": titulo,
+                "lista_livros.$.autor": autor,
+                "lista_livros.$.imagem": imagem,
+                "lista_livros.$.ano_publicacao": ano_publicacao,
+                "lista_livros.$.descricao": descricao,
+                "lista_livros.$.lista_generos": lista_generos,
+                "lista_livros.$.avaliacao": avaliacao,
+            }
+        }).catch(err => {
             return res.status(500).send("Error: Failed to update the book!")});
 
         return res.status(200).send("Success: Book updated!");

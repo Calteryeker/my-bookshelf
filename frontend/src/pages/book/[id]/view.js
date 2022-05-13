@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Router, { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { parseCookies } from 'nookies';
@@ -10,22 +11,27 @@ const BookView = () => {
 
   useEffect(() => {
     const fetchBook = async (id) =>{
+        if(id == undefined){
+            router.push('/home');
+        }
         const { ['mybookshelf-token']: token} = parseCookies();
 
-        const res = await axios.get(`http://localhost:3030/b/${id}/view`, {
+        await axios.get(`http://localhost:3030/b/${id}/view`, {
             headers :{
                 'Authorizathion': `Bearer ${token}`,
             }
+        }).then(res =>{
+            setBook(res.data.book);
+            return
         }).catch(err => {
             
         });
        
-        res ? setBook(res.data.book) : setBook({});
           
     };
 
     fetchBook(id);
-  }, [book]);
+  }, []);
 
   const generos = (lista_generos) => {
     return (
@@ -93,7 +99,10 @@ const BookView = () => {
   }
 
   return (
-        <>
+        <>  
+            <Head>
+                <title>MyBookshelf | Informações do Livro</title>
+            </Head>
             <p>Título: {book.titulo}</p>
             <p>Autor: {book.autor}</p>
             <p>Ano de Publicação: {book.ano_publicacao}</p>
@@ -102,7 +111,7 @@ const BookView = () => {
             <p>Avaliação: {book.avaliacao}</p>
 
             <button className='button' onClick={handleEditClick}>Editar</button>
-            <button className='button' onClick={confirmDelete}>Remover</button>
+            <button className='button' onClick={confirmDelete}>Remover</button>    
         </>
   )
 };
