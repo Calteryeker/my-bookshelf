@@ -11,7 +11,10 @@ module.exports = {
         brow_pod: {
           1: '#451800',
         },
-      }
+      },
+      fontFamily: {
+        luck: ["Luckiest Guy", "cursive"],
+      },
     },
   },
   plugins: [],

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,3 +19,8 @@ a {
 * {
   box-sizing: border-box;
 } */
+
+@font-face {
+  font-family: "Luckiest Guy", cursive;
+  src: url("/frontend/public/fonts/LuckiestGuy-Regular.ttf");
+} 
