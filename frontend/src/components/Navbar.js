@@ -10,11 +10,11 @@ const Navbar = () => {
                     <Image src="/images/logo.png" width={80}  height={80} />  
                     <span className="self-center text-[35px] font-luck whitespace-nowrap text-red-900">My Bookshelf</span>
                 </a>                        
-                <div className="hidden w-full md:block md:w-auto " id="mobile-menu">
+                <div className=" w-full md:block md:w-auto " id="mobile-menu">
                     <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
                             <Link href='/'>
-                                <a className="flex items-center pr-10 pl-10 justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-900 hover:bg-orange-800">
+                                <a className="flex items-center pr-10 pl-10 justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-900 hover:bg-orange-500">
                                     Home
                                 </a>
                             </Link>
@@ -22,7 +22,7 @@ const Navbar = () => {
 
                         <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
                             <Link href='/signup'>
-                                <a className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-900 hover:bg-orange-800">
+                                <a className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-900 hover:bg-orange-500">
                                     Cadastre-se
                                 </a>
                             </Link>
@@ -30,7 +30,7 @@ const Navbar = () => {
  
                         <div id="button-login" className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto ">
                             <Link href='/login'>
-                                <a className="flex items-center pr-10 pl-10 justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-orange	bg-romantic-1 hover:bg-orange-500">
+                                <a className="flex items-center pr-10 pl-10 justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-orange-900 hover:text-white bg-romantic-1 hover:bg-orange-500">
                                     Login
                                 </a>
                             </Link>

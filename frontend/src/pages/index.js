@@ -27,7 +27,7 @@ export default function Home() {
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
-                    <a href="/signup" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-normal rounded-md text-roange-800 bg-romantic-1 hover:bg-orange-500 md:py-4 md:text-lg md:px-10 ">
+                    <a href="/signup" className="font-luck w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-normal rounded-md text-orange-900 bg-romantic-1  hover:text-white hover:bg-orange-500 md:py-4 md:text-lg md:px-10 ">
                       Vamos começar ! </a>
                   </div>
                   
