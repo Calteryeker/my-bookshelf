@@ -49,7 +49,7 @@ export default function Signup() {
         <title>MyBookshelf | Cadastro</title>
       </Head>
       <Navbar />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mt-10">
         <Formik initialValues={{}} onSubmit={handleClickSignUp} validationSchema={validationSignup}>
           <Form className="signup-form">
             <h2 className="signup-form-title">Cadastro</h2>
