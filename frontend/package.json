@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "formik": "^2.2.9",
+    "ionicons": "^6.0.1",
     "moment": "^2.29.3",
     "next": "12.1.5",
     "nookies": "^2.5.2",

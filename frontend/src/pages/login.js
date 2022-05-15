@@ -19,9 +19,10 @@ export default function Login() {
     });
 
     return (
-        <div className="flex flex-col overflow-y-scroll items-stretch justify-between bg-romantic-1 min-h-screen ">
+        <div className="pt-28 flex flex-col overflow-y-scroll items-stretch justify-between bg-romantic-1 min-h-screen ">
             <Head>
                 <title>MyBookshelf | Login</title>
+                <link rel="icon" href="/logo.png" />
             </Head>
             <Navbar />
             <div className="flex flex-col items-center mt-10">

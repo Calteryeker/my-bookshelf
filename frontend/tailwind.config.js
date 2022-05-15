@@ -4,6 +4,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'md_c' : '856px',
+        'sm_c' : '390px',
+      },
       colors: {
         romantic: {
           1: '#FFC1A1',
