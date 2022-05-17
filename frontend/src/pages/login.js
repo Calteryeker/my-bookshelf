@@ -32,13 +32,13 @@ export default function Login() {
                         <h2 className="font-luck text-brow_pod-1 text-center text-3xl my-4">Fazer Acesso</h2>
                         <div className="mb-5">
                             <label className="">
-                                <Field name="username" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2" placeholder="Digite seu username ou email" />
+                                <Field name="username" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite seu username ou email" />
                                 <ErrorMessage component="p" name="username" className="text-xs text-red-700 text-center" />
                             </label>
                         </div>
                         <div className="">
                             <label className="">
-                                <Field type="password" name="password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2" placeholder="Digite sua senha" />
+                                <Field type="password" name="password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua senha" />
                                 <ErrorMessage component="p" name="password" className="text-xs text-red-700 text-center" />
                             </label>
                         </div>
