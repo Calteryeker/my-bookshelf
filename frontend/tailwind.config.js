@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'md_c' : '856px',
         'sm_c' : '390px',
+        'md_c' : '856px',
       },
       colors: {
         romantic: {
@@ -17,8 +17,13 @@ module.exports = {
         },
       },
       fontFamily: {
+        lekton: ["Lekton", "sans-serif"],
         luck: ["Luckiest Guy", "cursive"],
+        inter: ["Inter", "sans-serif"],
       },
+      backgroundImage: {
+        'section-logo-2': "url('/images/section2_fundo.png')",
+      }
     },
   },
   plugins: [],

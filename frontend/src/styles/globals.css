@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Lekton:ital,wght@0,400;0,700;1,400&family=Luckiest+Guy&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,6 +22,14 @@ a {
 } */
 
 @font-face {
-  font-family: "Luckiest Guy", cursive;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Lekton', sans-serif;
+  font-family: 'Luckiest Guy', cursive;
+  src: url("/frontend/public/fonts/Inter-VariableFont_slnt,wght.ttf");
+  src: url("/frontend/public/fonts/Lekton-Regular.ttf");
   src: url("/frontend/public/fonts/LuckiestGuy-Regular.ttf");
+ 
+  
+
+
 } 
