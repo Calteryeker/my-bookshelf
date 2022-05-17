@@ -1,26 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Lekton:ital,wght@0,400;0,700;1,400&family=Luckiest+Guy&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-} */
-
 @font-face {
-  font-family: "Luckiest Guy", cursive;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Lekton', sans-serif;
+  font-family: 'Luckiest Guy', cursive;
+  src: url("/frontend/public/fonts/Inter-VariableFont_slnt,wght.ttf");
+  src: url("/frontend/public/fonts/Lekton-Regular.ttf");
   src: url("/frontend/public/fonts/LuckiestGuy-Regular.ttf");
 } 

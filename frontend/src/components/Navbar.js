@@ -14,7 +14,6 @@ const Navbar = () => {
         <div className='shadow-md w-full fixed top-0 left-0'>
             <div className='md_c:flex items-center justify-between bg-white py-4 md_c:px-10 px-7'>
                 <div className='font-bold text-2xl cursor-pointer items-center font-[Poppins] text-gray-800'>
-                    {/* div do logo */}
                     <a href="/" className="flex items-center">
                         <Image src="/images/logo.png" width={80} height={80} />
                         <span className="self-center text-[26px] sm_c:text-[30px] font-luck whitespace-nowrap text-red-900">My Bookshelf</span>
