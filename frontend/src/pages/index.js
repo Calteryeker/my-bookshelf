@@ -15,7 +15,7 @@ export default function Home() {
         <div className="pb-8 pt-28 sm: md_c:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-50">
           <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div className="sm:text-center lg:text-left">
-              <h1 className="text-6xl tracking-tight font-extrabold text-gray-900 sm_c:text-7xl md:text-6xl">
+              <h1 className="text-6xl tracking-tight font-extrabold text-gray-900 sm_c:text-6xl md:text-6xl">
                 <span className="block xl:inline text-white font-luck tracking-wide">My Bookshelf para todos</span>
               </h1>
               <p className=" font-luck tracking-wide mt-3  text-pink-200 sm_c:mt-5 sm_c:text-2xl sm_c:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
@@ -23,7 +23,7 @@ export default function Home() {
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
-                  <a href="/signup" className="font-luck w-full flex items-center justify-center px-8 py-6 border border-transparent sm_c:text-2xl font-normal rounded-md text-orange-900 bg-romantic-1  hover:text-white hover:bg-orange-500 md:py-4 md:text-lg md:px-10 ">
+                  <a href="/signup" className="font-luck w-full flex items-center justify-center px-8 py-6 border border-transparent sm_c:text-2xl font-normal rounded-md text-orange-900 bg-romantic-1  hover:text-white hover:bg-orange-500 duration-500 md:py-4 md:text-lg md:px-10 ">
                     Vamos começar ! </a>
                 </div>
               </div>
@@ -46,10 +46,10 @@ export default function Home() {
       <div className="min-h-screen flex flex-col items-center justify-start  bg-white-900 bg-romantic-1 md_c:min-h-screen">
         <h2 className="font-bold items-center-top font-luck text-brow_pod-1 sm_c:mt-24 sm_c:text-center sm_c:text-7xl md_c:text-6xl md_c:mt-24">leitores</h2>
         <div className="flex lg:flex-row">
-          <div className=" hidden lg:flex lg:w-[1200px] lg:h-[1200px]">
-            <img className="  " src="/images/logo_section3.png" alt="" />
+          <div className="hidden lg:block">
+            <img className="lg:mt-10 lg:w-[1300px]" src="/images/logo_section3.png" alt="" />
           </div>
-          <div className="justify-center">
+          <div className="justify-center lg:mt-10">
             <img className=" sm_c:mt-9 sm_c:mx-auto" src="/images/persona.png" alt="" />
             <p className=" sm_c:mt-1 sm_c:text-2xl sm_c:font-extrabold sm_c:text-center sm_c:mx-10 sm_c:font-lekton sm_c:text-orange-900 ">Pedro Valentim</p>
             <p className=" sm_c:mt-6 sm_c:text-xl  sm_c:text-center sm_c:mx-10 sm_c:font-lekton sm_c:text-orange-900 ">
@@ -58,8 +58,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-
       <Footer />
     </div>
 
