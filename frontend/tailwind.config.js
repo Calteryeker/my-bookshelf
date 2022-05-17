@@ -23,6 +23,7 @@ module.exports = {
       },
       backgroundImage: {
         'section-logo-2': "url('/images/section2_fundo.png')",
+        'signup-bg': "url('/images/bg_signup.png')",
       }
     },
   },
