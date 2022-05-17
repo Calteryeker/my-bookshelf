@@ -19,32 +19,32 @@ export default function Login() {
     });
 
     return (
-        <div className="pt-28 flex flex-col overflow-y-scroll items-stretch justify-between bg-romantic-1 min-h-screen ">
+        <div className="pt-28 flex flex-col overflow-y-scroll justify-between bg-romantic-1 min-h-screen ">
             <Head>
                 <title>MyBookshelf | Login</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
-            <Navbar />
-            <div className="flex flex-col items-center mt-10">
+            <Navbar className="md_c:"/>
+            <div className="flex flex-col items-center mt-10 bg-white rounded-2xl mx-auto w-96 pb-20 md_c:w-96 md_c:mx-auto">
                 <Formik initialValues={{}} onSubmit={handleClickLogin} validationSchema={validationLogin}>
-                    <Form >
-                        <h2 className="login-form-title">Login</h2>
-                        <div className="login-form-group">
-                            <label className="login-form-field-type">Username/Email:
-                                <Field name="username" className="form-field" placeholder="Digite seu username ou email" />
-                                <ErrorMessage component="span" name="username" className="form-error" />
+                    <Form className="items-center flex flex-col">
+                        <img src="/images/logo_bg_brow.png" className="mx-auto mt-10" width={80} height={80} />
+                        <h2 className="font-luck text-brow_pod-1 text-center text-3xl my-4">Fazer Acesso</h2>
+                        <div className="mb-5">
+                            <label className="">
+                                <Field name="username" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2" placeholder="Digite seu username ou email" />
+                                <ErrorMessage component="p" name="username" className="text-xs text-red-700 text-center" />
                             </label>
                         </div>
-                        <div className="login-form-group">
-                            <label className="login-form-field-type">Senha:
-                                <Field type="password" name="password" className="form-field" placeholder="Digite sua senha" />
-                                <ErrorMessage component="span" name="password" className="form-error" />
+                        <div className="">
+                            <label className="">
+                                <Field type="password" name="password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2" placeholder="Digite sua senha" />
+                                <ErrorMessage component="p" name="password" className="text-xs text-red-700 text-center" />
                             </label>
                         </div>
-                        <button className="button" type="submit">
+                        <button className="rounded-xl bg-romantic-1 text-brow_pod-1 font-luck text-xl px-24 py-2 mt-6" type="submit">
                             Login
                         </button>
-
                     </Form>
                 </Formik>
             </div>
