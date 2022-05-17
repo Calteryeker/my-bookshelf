@@ -59,7 +59,14 @@ module.exports = {
 
   //delete user
   async delete(req, res){
-    await User.deleteOne({_id: req.userId});
+    const senha = req.body.senha;
+    const userRecovered = await User.findById(req.userId).select('+senha -lista_livros');
+    if(!await bcrypt.compare(senha, userRecovered.senha)){
+      return res.status(401).send({err: 'Error: Password doesnt match!'})
+    }
+    else{
+      await User.deleteOne({_id: req.userId});
+    }
 
     if(await User.countDocuments({_id: req.userId}) != 0)
         return res.status(500).send({userId: req.userId, error:'Error: Cannot delete user!'});
