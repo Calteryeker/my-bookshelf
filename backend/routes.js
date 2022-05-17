@@ -20,6 +20,7 @@ routes.put('/u/profile/edit', AuthMiddleware, UserController.update);
 //Rota para deletar um usuário do sistema
 routes.delete('/u/profile/delete', AuthMiddleware, UserController.delete);
 
+//Rota para recuperar as informações do usuário autenticado
 routes.get('/user', AuthMiddleware, UserController.recUser);
 
 //Rotas para controle de livros

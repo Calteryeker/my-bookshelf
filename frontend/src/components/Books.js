@@ -11,9 +11,9 @@ const Books = ({ books, loading }) => {
         <h2>Seus Livros:</h2>
         <ul className='list-group'>
         {books.map(book => (
-            <li>
+            <li key={book._id}>
                 <Link href={`/book/${book._id}/view`} >
-                    <a key={book._id} className='list-group-item'>
+                    <a className='list-group-item'>
                         {book.titulo}
                     </a>
                 </Link>

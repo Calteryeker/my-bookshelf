@@ -44,12 +44,13 @@ export default function Signup() {
   }
 
   return (
-    <>
+    <div className="pt-28 flex flex-col overflow-y-scroll items-stretch justify-between bg-signup-bg bg-no-repeat bg-cover min-h-screen ">
       <Head>
         <title>MyBookshelf | Cadastro</title>
+        <link rel="icon" href="/logo.png" />
       </Head>
       <Navbar />
-      <div className="image-bg">
+      <div className="flex flex-col items-center bg-white bg-opacity-30 sm_c:mt-10 sm_c:mx-6">
         <Formik initialValues={{}} onSubmit={handleClickSignUp} validationSchema={validationSignup}>
           <Form className="signup-form">
             <h2 className="signup-form-title">Cadastro</h2>
@@ -97,6 +98,6 @@ export default function Signup() {
         </Formik>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }

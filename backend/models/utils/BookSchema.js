@@ -18,7 +18,7 @@ const BookSchema = new mongoose.Schema({
   ano_publicacao: String,
   descricao: String,
   lista_generos: [String],
-  avalicacao: Number
+  avaliacao: Number
 });
 
 module.exports = BookSchema;
