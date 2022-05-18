@@ -24,7 +24,7 @@ export default function Login() {
                 <title>MyBookshelf | Login</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
-            <Navbar className="md_c:"/>
+            <Navbar bgColor={`romantic-1`} tittleColor={`brow_pod-1`} currentPage={"Login"}/>
             <div className="flex flex-col items-center mt-10 bg-white rounded-2xl mx-auto w-96 pb-20 md_c:w-96 md_c:mx-auto">
                 <Formik initialValues={{}} onSubmit={handleClickLogin} validationSchema={validationLogin}>
                     <Form className="items-center flex flex-col">

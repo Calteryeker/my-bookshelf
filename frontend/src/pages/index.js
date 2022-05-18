@@ -9,7 +9,7 @@ export default function Home() {
         <title>MyBookshelf | Início</title>
         <link rel="icon" href="/logo.png" />
       </Head>
-      <Navbar />
+      <Navbar bgColor={`white`} tittleColor={`brow_pod-1`} currentPage={"Home"}/>
 
       <div className="flex flex-col min-h-screen items-center justify-around bg-brow_pod-1 overflow-hidden md_c:flex md:flex-row">
         <div className="pb-8 pt-28 sm: md_c:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-50">
