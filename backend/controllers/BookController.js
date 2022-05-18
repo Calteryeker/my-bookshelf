@@ -58,7 +58,7 @@ module.exports = {
     },
 
     async delete(req, res){
-        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}}).then(res => {
+        await User.updateOne({_id: req.userId}, {$pull: {lista_livros: {_id: req.params.id}}}).then(response => {
             return res.status(200).send('Success: Book deleted!');
         })
         .catch((err) => {

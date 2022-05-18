@@ -23,22 +23,22 @@ export default function BookCreate(){
     });
     
     async function handleClickEdit(dados) {
-    const { ['mybookshelf-token']: token} = parseCookies();
-    
-    const rating = parseFloat(dados.rating)
-    const lista_generos = dados.genres.split(';')
+        const { ['mybookshelf-token']: token} = parseCookies();
+        
+        const rating = parseFloat(dados.rating)
+        const lista_generos = dados.genres.split(';')
 
-    await axios.post(`http://localhost:3030/b/create`, {
-        titulo: dados.title,
-        autor: dados.author,
-        ano_publicacao: dados.year,
-        descricao: dados.description,
-        lista_generos: lista_generos,
-        avaliacao: dados.rating,
-    }, {
-        headers: {
-            'Authorizathion': `Bearer ${token}`,
-        }
+        await axios.post(`http://localhost:3030/b/create`, {
+            titulo: dados.title,
+            autor: dados.author,
+            ano_publicacao: dados.year,
+            descricao: dados.description,
+            lista_generos: lista_generos,
+            avaliacao: dados.rating,
+        }, {
+            headers: {
+                'Authorizathion': `Bearer ${token}`,
+            }
     }).then((response) => {
         console.log(response.status)
         router.push(`/home`)
@@ -48,12 +48,16 @@ export default function BookCreate(){
 
     };
     
+    const handleReturn = () => {
+        router.push(`/home`);
+      }
 
     return (
         <>
             <Head>
                 <title>MyBookshelf | Adicionar Livro</title>
             </Head>
+            <button onClick={handleReturn}>Retornar</button>
             <div className="flex flex-col items-center">
                 <Formik initialValues={{}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
                     <Form className="edit-book-form">
