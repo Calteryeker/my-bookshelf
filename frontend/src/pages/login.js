@@ -19,13 +19,13 @@ export default function Login() {
     });
 
     return (
-        <div className="pt-28 flex flex-col overflow-y-scroll justify-between bg-romantic-1 min-h-screen ">
+        <div className="pt-28 flex flex-col justify-between bg-romantic-1 min-h-screen ">
             <Head>
                 <title>MyBookshelf | Login</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
-            <Navbar bgColor={`romantic-1`} tittleColor={`brow_pod-1`} currentPage={"Login"}/>
-            <div className="flex flex-col items-center mt-10 bg-white rounded-2xl mx-auto w-96 pb-20 md_c:w-96 md_c:mx-auto">
+            <Navbar bgColor={`white`} tittleColor={`brow_pod-1`} currentPage={"Login"} />
+            <div className="flex flex-col items-center mt-10 bg-white rounded-2xl mx-auto w-96 pb-20 md_c:w-96 md_c:mx-auto md_c:mb-10">
                 <Formik initialValues={{}} onSubmit={handleClickLogin} validationSchema={validationLogin}>
                     <Form className="items-center flex flex-col">
                         <img src="/images/logo_bg_brow.png" className="mx-auto mt-10" width={80} height={80} />
