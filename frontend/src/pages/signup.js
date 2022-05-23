@@ -44,7 +44,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex flex-col  justify-between bg-signup-bg bg-no-repeat bg-cover min-h-screen sm_c:pt-28 md_c:pt-28">
+    <div className="flex flex-col justify-between bg-signup-bg bg-no-repeat bg-cover min-h-screen sm_c:pt-28 md_c:pt-28">
       <Head>
         <title>MyBookshelf | Cadastro</title>
         <link rel="icon" href="/logo.png" />

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router"
 import { parseCookies, destroyCookie } from "nookies";
 import { useState, useContext } from "react";
@@ -51,6 +52,10 @@ export default function ProfileView() {
   return (
       <>
           <div>
+              <Head>
+                <title>MyBookshelf | Meu Perfil</title>
+                <link rel="icon" href="/logo.png" />
+              </Head>
               <h1>Meu Perfil:</h1>
               <div className="user-info">
                 <p>Nome: {user ? user.nome : ""}</p>

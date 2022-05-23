@@ -53,6 +53,7 @@ export default function Index() {
     <>
       <Head>
         <title>MyBookshelf | Home</title>
+        <link rel="icon" href="/logo.png" />
       </Head>
       <h1>Welcome {user ? user.nome : ''}</h1>
       <nav>
