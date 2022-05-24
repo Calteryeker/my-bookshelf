@@ -44,7 +44,7 @@ export default function BookCreate() {
             }
         }).then((response) => {
             console.log(response.status)
-            router.push(`/home`)
+            router.replace(`/home`)
         }).catch((error) => {
             console.log(error)
         })
@@ -52,7 +52,7 @@ export default function BookCreate() {
     };
 
     const handleReturn = () => {
-        router.push(`/home`);
+        router.replace(`/home`);
     }
 
     return (

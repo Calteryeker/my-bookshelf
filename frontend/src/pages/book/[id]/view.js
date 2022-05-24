@@ -19,7 +19,7 @@ export default function BookView(){
         const fetchBook = async (id) =>{
             setIsLoading(true);
             if(id == undefined){
-                router.push('/home');
+                router.replace('/home');
             }
             const { ['mybookshelf-token']: token} = parseCookies();
 
@@ -61,7 +61,7 @@ export default function BookView(){
             }
         }).then((res) => {
             if(res.status == 200){
-                router.push('/home')
+                router.replace('/home')
             }
         });
     }
@@ -71,7 +71,7 @@ export default function BookView(){
     }
 
     const handleReturn = () => {
-        router.push('/home');
+        router.replace('/home');
     }
 
     const handleStateChange = async (dados) => {

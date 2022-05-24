@@ -46,7 +46,7 @@ export default function BookEdit() {
             }
         }).then((response) => {
             console.log(response.status)
-            router.push(`/book/${id}/view`)
+            router.replace(`/book/${id}/view`)
         }).catch((error) => {
             console.log(error)
         })
@@ -54,7 +54,7 @@ export default function BookEdit() {
     };
 
     const handleReturn = () => {
-        router.push(`/book/` + `${id}` + `/view`);
+        router.replace(`/book/` + `${id}` + `/view`);
     }
 
 

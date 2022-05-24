@@ -40,7 +40,7 @@ export default function AccountEdit() {
         }
       }).then((response) => {
         destroyCookie(undefined, 'mybookshelf-token');
-        router.push('/')
+        router.replace('/')
         console.log(response.status)
       })
     }
@@ -54,7 +54,7 @@ export default function AccountEdit() {
           'Authorizathion': `Bearer ${token}`
         }
       }).then((response) => {
-        router.push('/home');
+        router.replace('/profile/view');
         console.log(response.status)
       })
     }
@@ -66,7 +66,7 @@ export default function AccountEdit() {
   }
 
   const handleReturn = () => {
-    router.push(`/profile/view`);
+    router.replace(`/profile/view`);
   }
 
   return (
@@ -136,4 +136,21 @@ export default function AccountEdit() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps = async (ctx) => {
+  const { ['mybookshelf-token']: token} = parseCookies(ctx);
+   
+  if(!token){
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props : {}
+  }
 }
