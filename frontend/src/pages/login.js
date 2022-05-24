@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { parseCookies } from "nookies";
 
 export default function Login() {
     const { signIn } = useContext(AuthContext);
@@ -53,3 +54,20 @@ export default function Login() {
 
     )
 }
+
+export const getServerSideProps = async (ctx) => {
+    const { ['mybookshelf-token']: token} = parseCookies(ctx);
+     
+    if(token){
+      return {
+        redirect: {
+          destination: '/home',
+          permanent: false,
+        }
+      }
+    }
+  
+    return {
+      props : {}
+    }
+  }

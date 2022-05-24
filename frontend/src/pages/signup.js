@@ -51,7 +51,7 @@ export default function Signup() {
       </Head>
       <Navbar bgColor={`brow_pod-1`} tittleColor={`white`} currentPage={"Cadastre-se"} image={"logonova2.png"} />
       <div className="pt-10 flex flex-col items-center bg-white bg-opacity-80 rounded-lg sm_c:mt-10 sm_c:mx-4 sm_c:mb-10 md_c:w-[120] md_c:mx-auto md_c:mb-10">
-        <img classname="sm_c:mx-auto justify-center" width={80} height={80} src="/images/logo_bg_brow.png" />
+        <img className="sm_c:mx-auto justify-center" width={80} height={80} src="/images/logo_bg_brow.png" />
         <h2 className="font-luck flex items-center justify-center sm_c:mt-10 sm_c:text-2xl sm_c:text-center sm_c:mx-2 sm_c:text-brow_pod-1 md_c:py-4 md_c:text-2xl md:px-10">Registre-se em Segundos</h2>
         <p className="mx-5 font-inter border-brow_pod-1 sm_c:text-center">
           Use sua conta de email para registrar-se no mybookshelf. É gratuito!

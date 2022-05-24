@@ -1,12 +1,12 @@
-import Head from "next/head";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
 import { useRouter } from "next/router";
-import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import { parseCookies } from "nookies";
+import Head from "next/head";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import * as yup from "yup";
+import axios from "axios";
+
 
 
 export default function BookCreate() {
@@ -62,13 +62,13 @@ export default function BookCreate() {
                     <title>MyBookshelf | Adicionar Livro</title>
                     <link rel="icon" href="/logo.png" />
                 </Head>
-                <Header tittle={"Adicionar Livro"}>
+                <Header title={"Adicionar Livro"}>
                     <button onClick={handleReturn} className="rounded-xl left-0 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
                 </Header>
                 <div className="flex flex-col items-center my-10 bg-white rounded-2xl mx-auto w-96 pb-10 md_c:w-[500px] md_c:mx-auto md_c:mb-10">
                     <Formik initialValues={{}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
                         <Form className="items-center flex flex-col mt-10">
-                            <img classname="mx-auto" width={80} height={80} src="/images/logo_bg_brow.png" />
+                            <img className="mx-auto" width={80} height={80} src="/images/logo_bg_brow.png" />
                             <div className="mt-5">
                                 <label className="">
                                     <p>Título:</p>
