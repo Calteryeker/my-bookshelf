@@ -2,6 +2,7 @@ const { Router } = require('express');
 const UserController = require('./controllers/UserController');
 const AuthController = require('./controllers/AuthController');
 const BookController = require('./controllers/BookController');
+const SupportController = require('./controllers/SupportController')
 const routes = Router();
 
 const AuthMiddleware = require('./middleware/auth.js');
@@ -33,10 +34,16 @@ routes.get('/b/:id/view', AuthMiddleware, BookController.view);
 //Rota para alterar informações de um livro
 routes.put('/b/:id/edit', AuthMiddleware, BookController.edit);
 
+//Rota para alterar o estado de um livro
+routes.patch('/b/:id/state', AuthMiddleware, BookController.updateState);
+
 //Rota para deletar um livro do sistema
 routes.delete('/b/:id/delete', AuthMiddleware, BookController.delete);
 
 //Rota para recuperar os livros do usuário
 routes.get('/b', AuthMiddleware, BookController.getBooks);
+
+//Rota para registro de mensagens dos usuários
+routes.post('/m', AuthMiddleware, SupportController.create);
 
 module.exports = routes;
