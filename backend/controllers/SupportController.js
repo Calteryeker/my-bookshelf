@@ -9,10 +9,15 @@ module.exports = {
             user_email: user_email,
             titulo: titulo,
             mensagem: mensagem
+        }).then(() => {
+            return res.status(200).send("Success: Message Created!");
         }).catch(err => {
-            return res.status(500).send({err: err, msg:"Error: Server Failed to create the resource!"})
+            if(err.message.includes('mensagem' || 'titulo' || 'user_name' || 'user_email'))
+                return res.status(400).send({err: err, msg:"Error: Some Required Information are missing!"})
+
+            return res.status(500).send({err: err, msg:"Error: Server was unable to complete the request"})
         })
 
-        return res.status(200).send("Success: Message Created!");
+        
     }
 }

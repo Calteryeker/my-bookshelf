@@ -28,7 +28,6 @@ export default function BookCreate() {
     async function handleClickEdit(dados) {
         const { ['mybookshelf-token']: token } = parseCookies();
 
-        const rating = parseFloat(dados.rating)
         const lista_generos = dados.genres.split(';')
 
         await axios.post(`http://localhost:3030/b/create`, {
@@ -38,6 +37,7 @@ export default function BookCreate() {
             descricao: dados.description,
             lista_generos: lista_generos,
             avaliacao: dados.rating,
+            estado: 0
         }, {
             headers: {
                 'Authorizathion': `Bearer ${token}`,
