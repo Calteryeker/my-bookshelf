@@ -15,13 +15,14 @@ export default function Index() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [currentLocalPage, setCurrentLocalPage] = useState(1);
-  const [booksPerPage] = useState(20);
+  const [booksPerPage] = useState(1);
 
   const [title, setTitle] = useState("Meus Livros:");
-
   const [books, setBooks] = useState([]);
-  const [filteredBooks, setFilteredBooks] = useState([]);
+
+  const [filteredBooks, setFilteredBooks] = useState(undefined);
   const [filtering, setFiltering] = useState(false)
+  const [filter, setFilter] = useState("0");
 
   useEffect(() => {
     const fetchBooks = async (currentPage) => {
@@ -44,9 +45,11 @@ export default function Index() {
     fetchBooks(currentLocalPage)
   }, [])
   
-  //Livros não filtrados
+  //Controle da páginação
   const indexLastBook = currentLocalPage * booksPerPage;
   const indexFirstBook = indexLastBook - booksPerPage;
+
+  //Livros não filtrados
   const currentBooks = books.slice(indexFirstBook, indexLastBook);
   
   var lastBooksAdded
@@ -58,7 +61,7 @@ export default function Index() {
   }
 
   //Livros filtrados
-  const currentFilteredBooks = filteredBooks.slice(indexFirstBook, indexLastBook)
+  const currentFilteredBooks = filteredBooks ? filteredBooks.slice(indexFirstBook, indexLastBook) : undefined
 
   const paginate = pageNumber => setCurrentLocalPage(pageNumber)
 
@@ -67,41 +70,95 @@ export default function Index() {
     Router.replace('/')
   }
 
-  const myBooks = () => {
-    if (filtering){
+  function chargeLastBooks(lastBooks){
+    return (
+      lastBooks.map(book => (
+        <li key={book._id}>
+          <Link href={`/book/${book._id}/view`} >
+            <a className='list-group-item'>
+                {book.titulo}
+            </a>
+          </Link>
+        </li>
+      ))
+    )
+  }
 
+
+  const myBooks = () => {
+    setTitle("Meus Livros:")
+
+    if (filtering){
+      searchWithFilter(document.getElementById("textFilter").value)
     }
     else{
-
+      setFilteredBooks(undefined)
+      console.log("meus livros")
     }
-
-    setTitle("Meus Livros:")
   }
 
   const filterReading = () => {
+    setTitle("Em Leitura:")
     if (filtering){
-
+      searchWithFilter(document.getElementById("textFilter").value)
+      setFilteredBooks(filteredBooks => filteredBooks.filter(book => book.estado === 1))
     }
     else{
-
+      setFilteredBooks(books.filter(book => book.estado === 1))
     }
-
-    setTitle("Em Leitura:")
   }
 
   const filterFinished = () => {
+    setTitle("Finalizados:")
     if (filtering){
-
+      searchWithFilter(document.getElementById("textFilter").value)
+      setFilteredBooks(filteredBooks => filteredBooks.filter(book => book.estado === 2))
     }
     else{
-
-    }
-
-    setTitle("Finalizados:")
+      setFilteredBooks(books.filter(book => book.estado === 2))
+      
+    } 
   }
 
-  function searchWithFilter(filterType, text){
+  function searchWithFilter(text){
+    setCurrentLocalPage(1);
+    const regex = new RegExp(text.toLowerCase())
+    
+    if(filter === "Gênero"){
+      setFilteredBooks(books.filter(book => book.lista_generos.filter(genero => regex.test(genero.toLowerCase())).length > 0))
+    }
+    else if(filter === "Autor"){
+      setFilteredBooks(books.filter(book => regex.test(book.autor.toLowerCase())))
+    }
+    else if(filter === "Ano"){
+      if(text == ''){
+        setFilteredBooks(books)
+        return
+      }
+      setFilteredBooks(books.filter(book => book.ano_publicacao == text))
+    }
+  }
 
+  function callFilter(){
+    const regex = new RegExp(title.toLowerCase())
+    if(regex.test("meus livros:")){
+      myBooks()
+    }
+    else if(regex.test("em leitura:")){
+      filterReading()
+    }
+    else if(regex.test("finalizados:")){
+      filterFinished()
+    }
+  }
+
+  function showFilterBar(){
+    setFiltering(true); 
+    callFilter()
+  }
+
+  function clearSearch(){
+    document.getElementById("textFilter").value = '';
   }
 
   return (
@@ -121,23 +178,23 @@ export default function Index() {
         <button onClick={myBooks}>Meus Livros</button>
         <button onClick={filterReading}>Em Leitura</button>
         <button onClick={filterFinished}>Finalizados</button>
-        <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded}/>
+        {lastBooksAdded ? <><h3>Últimos Livros Adicionados:</h3><ol>{chargeLastBooks(lastBooksAdded)}</ol></> : <p>Carregando ...</p>}
       </div>
       <div>
-        <Formik initialValues={{picked: -1}}>
+        <Formik initialValues={{picked: "0"}}>
             {({values}) => (
             <Form>
                 <div>Filtros</div>
-                <div role="group" aria-labelledby="my-radio-group" onChange={() => setFiltering(true)}>
-                    <label>
+                <div role="group" aria-labelledby="my-radio-group" onClick={showFilterBar}>
+                    <label onClick={() => {setFilter(values.picked)}}>
                         <Field type="radio" name="picked" value="Gênero"/>
                         Gênero
                     </label>
-                    <label>
+                    <label onClick={setFilter(values.picked)}>
                         <Field type="radio" name="picked" value="Autor"/>
                         Autor
                     </label>
-                    <label>
+                    <label onClick={setFilter(values.picked)}>
                         <Field type="radio" name="picked" value="Ano"/>
                         Ano
                     </label>
@@ -146,16 +203,16 @@ export default function Index() {
                 {
                   filtering ? 
                     <label>
-                      <input id="textFilter" placeholder={`Digite o ${values.picked}`}  onChange={() => searchWithFilter(values.picked, document.getElementById('textFilter').value)}/>
-                      <button type="button" onClick={() => {values.picked = -1; setFiltering(false)}}>Limpar Filtros</button>
+                      <input id="textFilter" placeholder={`Digite o ${values.picked}`} autoComplete="off" onChange={() => callFilter()}/>
+                      <button type="button" onClick={() => {values.picked = "0"; setFiltering(false); clearSearch(); callFilter()}}>Limpar Filtros</button>
                     </label> : null
                 }
             </Form>
             )}      
         </Formik>
       </div>
-      <Books title={title} books={filteredBooks.length > 0 ? currentfilteredBooks : currentBooks} loading={loading}/>
-      <Pagination booksPerPage={booksPerPage} totalBooks = {filteredBooks.length > 0? filteredBooks.length : books.length} paginate ={paginate} />
+      <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading}/>
+      <Pagination booksPerPage={booksPerPage} totalBooks = {filteredBooks ? filteredBooks.length : books.length} paginate ={paginate} />
       <Footer/>
     </>
   )
