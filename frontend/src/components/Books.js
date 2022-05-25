@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const Books = ({title, books, loading }) => {
-  if (loading) {
+  if (loading || !books) {
     return <h2>Loading...</h2>;
   }
 

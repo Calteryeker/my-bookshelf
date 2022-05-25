@@ -67,20 +67,6 @@ export default function Index() {
     Router.replace('/')
   }
 
-  function chargeLastBooks(lastBooks){
-    return (
-      lastBooks.map(book => (
-        <li key={book._id}>
-          <Link href={`/book/${book._id}/view`} >
-                    <a className='list-group-item'>
-                        {book.titulo}
-                    </a>
-                </Link>
-        </li>
-      ))
-    )
-  }
-
   const myBooks = () => {
     if (filtering){
 
@@ -135,7 +121,7 @@ export default function Index() {
         <button onClick={myBooks}>Meus Livros</button>
         <button onClick={filterReading}>Em Leitura</button>
         <button onClick={filterFinished}>Finalizados</button>
-        {lastBooksAdded ? <><h3>Últimos Livros Adicionados:</h3><ol>{chargeLastBooks(lastBooksAdded)}</ol></> : <p>Carregando ...</p>}
+        <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded}/>
       </div>
       <div>
         <Formik initialValues={{picked: -1}}>
