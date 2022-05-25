@@ -17,6 +17,8 @@ export default function Index() {
   const [currentLocalPage, setCurrentLocalPage] = useState(1);
   const [booksPerPage] = useState(20);
 
+  const [title, setTitle] = useState("Meus Livros:");
+
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [filtering, setFiltering] = useState(false)
@@ -46,6 +48,14 @@ export default function Index() {
   const indexLastBook = currentLocalPage * booksPerPage;
   const indexFirstBook = indexLastBook - booksPerPage;
   const currentBooks = books.slice(indexFirstBook, indexLastBook);
+  
+  var lastBooksAdded
+  if(books.length > 5){
+    lastBooksAdded = books.slice(books.length-5)
+  }
+  else{
+    lastBooksAdded = books
+  }
 
   //Livros filtrados
   const currentFilteredBooks = filteredBooks.slice(indexFirstBook, indexLastBook)
@@ -57,12 +67,51 @@ export default function Index() {
     Router.replace('/')
   }
 
-  const filterReading = () => {
+  function chargeLastBooks(lastBooks){
+    return (
+      lastBooks.map(book => (
+        <li key={book._id}>
+          <Link href={`/book/${book._id}/view`} >
+                    <a className='list-group-item'>
+                        {book.titulo}
+                    </a>
+                </Link>
+        </li>
+      ))
+    )
+  }
 
+  const myBooks = () => {
+    if (filtering){
+
+    }
+    else{
+
+    }
+
+    setTitle("Meus Livros:")
+  }
+
+  const filterReading = () => {
+    if (filtering){
+
+    }
+    else{
+
+    }
+
+    setTitle("Em Leitura:")
   }
 
   const filterFinished = () => {
+    if (filtering){
 
+    }
+    else{
+
+    }
+
+    setTitle("Finalizados:")
   }
 
   function searchWithFilter(filterType, text){
@@ -83,8 +132,10 @@ export default function Index() {
       </nav>
       <div>
         <Link href="book/create"><button>Adicionar Livro</button></Link>
-        <a onClick={filterReading}>Em Leitura</a>
-        <a onClick={filterFinished}>Finalizados</a>
+        <button onClick={myBooks}>Meus Livros</button>
+        <button onClick={filterReading}>Em Leitura</button>
+        <button onClick={filterFinished}>Finalizados</button>
+        {lastBooksAdded ? <><h3>Últimos Livros Adicionados:</h3><ol>{chargeLastBooks(lastBooksAdded)}</ol></> : <p>Carregando ...</p>}
       </div>
       <div>
         <Formik initialValues={{picked: -1}}>
@@ -117,7 +168,7 @@ export default function Index() {
             )}      
         </Formik>
       </div>
-      <Books books={filteredBooks.length > 0 ? currentfilteredBooks : currentBooks} loading={loading}/>
+      <Books title={title} books={filteredBooks.length > 0 ? currentfilteredBooks : currentBooks} loading={loading}/>
       <Pagination booksPerPage={booksPerPage} totalBooks = {filteredBooks.length > 0? filteredBooks.length : books.length} paginate ={paginate} />
       <Footer/>
     </>
