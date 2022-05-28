@@ -56,6 +56,7 @@ export default function ProfileView() {
                 <title>MyBookshelf | Meu Perfil</title>
                 <link rel="icon" href="/logo.png" />
               </Head>
+              <button className="button" onClick={handleReturn}>Retornar</button>
               <h1>Meu Perfil:</h1>
               <div className="user-info">
                 <p>Nome: {user ? user.nome : ""}</p>
@@ -65,7 +66,7 @@ export default function ProfileView() {
               </div>
               <button className="button" onClick={handleClickEdit}>Editar Informações</button>
               <button className="button" onClick={() => setShowModal(true)}>Excluir Conta</button>
-              <button className="button" onClick={handleReturn}>Retornar</button>
+              
               <Modal show={showModal} onClose={() => setShowModal(false)}>
                     <h3>Deseja excluir permanentemente sua conta?</h3>
                     <Formik initialValues={{}} validationSchema={validationDelete} onSubmit={deleteAccount}>
@@ -73,7 +74,7 @@ export default function ProfileView() {
                         <div className="signup-form-group">
                           <label className="signup-form-field-type">Senha Atual:
                             <Field type="password" name="password" className="form-field" placeholder="Digite sua senha" />
-                            <ErrorMessage component="span" name="password" className="form-error" />
+                            <ErrorMessage component="div" name="password" className="block" />
                           </label>
                           <button type="submit">Confirmar</button>
                         </div>

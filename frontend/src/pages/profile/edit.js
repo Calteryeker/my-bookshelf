@@ -1,20 +1,27 @@
+import Header from "../../components/Header";
 import Head from "next/head";
 import Footer from "../../components/Footer";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
-import { useState } from "react"
-import { useRouter } from "next/router";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { parseCookies, destroyCookie } from "nookies";
+import { useContext, useState } from "react"
+import { useRouter } from "next/router";
+import { AuthContext } from "../../contexts/AuthContext";
+import * as yup from "yup";
 import axios from "axios";
 import moment from "moment";
-import { parseCookies, destroyCookie } from "nookies";
-import Header from "../../components/Header";
+
+
 
 export default function AccountEdit() {
+  const { user } = useContext(AuthContext)
   const router = useRouter()
-  const [startDate, setStartDate] = useState(new Date(1995, 0, 1));
+  const [startDate, setStartDate] = useState(null);
 
+  const now = new Date()
+  const maxDate = new Date(now.getFullYear()-8, 11, 31)
+  
   const validationEdit = yup.object().shape({
     name: yup.string().required("Campo NOME é obrigatório!"),
     actual_password: yup.string().min(8, "Senha deve ter 8 caracteres!"),
@@ -62,14 +69,14 @@ export default function AccountEdit() {
   };
 
   function testDate() {
-    startDate === null ? setStartDate(new Date(1995, 0, 1)) : startDate
+    startDate === null ? setStartDate(moment(user.data_nascimento).toDate()) : startDate
   }
 
   const handleReturn = () => {
     router.replace(`/profile/view`);
   }
 
-  return (
+  return !user ? <h1>Carregando ...</h1> :(
     <>
       <div className="pt-28 flex flex-col justify-between bg-romantic-1 min-h-screen">
         <Head>
@@ -80,7 +87,7 @@ export default function AccountEdit() {
           <button onClick={handleReturn} className="rounded-xl left-0 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
         </Header>
         <div className="flex flex-col items-center my-10 bg-white rounded-2xl mx-auto w-96 pb-10 md_c:w-[500px] md_c:mx-auto md_c:mb-10">
-          <Formik initialValues={{}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
+          <Formik initialValues={{name: user.nome, email: user.email, birthdate: moment(user.data_nascimento).toDate()}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
             <Form className="items-center flex flex-col mt-10">
               <img className="mx-auto" width={80} height={80} src="/images/logo_bg_brow.png" />
               <div className="mt-5">
@@ -121,7 +128,7 @@ export default function AccountEdit() {
               <div className="">
                 <label className="">
                   <p>Data de nascimento:</p>
-                  <DatePicker showYearDropdown dropdownMode="select" name="birthdate" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" selected={startDate} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} />
+                  <DatePicker showYearDropdown adjustDateOnChange dropdownMode="select" name="birthdate" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" selected={startDate ? startDate : moment(user.data_nascimento).toDate()} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} maxDate={maxDate}/>
                   <ErrorMessage component="P" name="birthdate" className="text-xs text-red-700 text-center" />
                 </label>
               </div>

@@ -1,17 +1,20 @@
-import Head from "next/head";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
 import { useState } from "react"
-import Router from "next/router";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Axios from "axios";
+import Head from "next/head";
+import Router from "next/router";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import * as yup from "yup";
+import axios from "axios";
 import moment from "moment";
 
 export default function Signup() {
   const [startDate, setStartDate] = useState(new Date(1995, 0, 1));
+
+  const now = new Date()
+  const maxDate = new Date(now.getFullYear()-8, 11, 31)
 
   const validationSignup = yup.object().shape({
     name: yup.string().required("Campo NOME é obrigatório!"),
@@ -25,7 +28,7 @@ export default function Signup() {
 
     const dateFake = moment(startDate).format('DD/MM/YYYY')
 
-    await Axios.post("http://localhost:3030/signup", {
+    await axios.post("http://localhost:3030/signup", {
       login: dados.username,
       senha: dados.password,
       nome: dados.name,
@@ -81,7 +84,7 @@ export default function Signup() {
               </div>
               <div className="signup-form-group py-2">
                 <label className="sm_c:grid sm_c:grid-cols-1 sm_c:gap-2">Data de Nascimento:
-                  <DatePicker showYearDropdown dropdownMode="select" name="birthdate" className="font-inter sm_c:form-field sm_c:rounded-2xl sm_c:py-3 sm_c:px-16 sm_c:border-brow_pod-1 sm_c:border-2 sm_c:pl-2" selected={startDate} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} />
+                  <DatePicker id="date-picker" showYearDropdown adjustDateOnChange dropdownMode="select" name="birthdate" className="font-inter sm_c:form-field sm_c:rounded-2xl sm_c:py-3 sm_c:px-16 sm_c:border-brow_pod-1 sm_c:border-2 sm_c:pl-2" selected={startDate} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} maxDate={maxDate}/>
                   <ErrorMessage component="p" name="birthdate" className="text-xs text-red-700 text-center" />
                 </label>
 
