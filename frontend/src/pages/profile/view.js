@@ -75,8 +75,8 @@ export default function ProfileView() {
         <div className="flex flex-col items-center mt-20 bg-white rounded-2xl mx-auto w-96 pb-10 md_c:w-[50vw]">
           <UserInfo user={user}/>
           <div className="flex flex-row justify-center items-center">
-            <button className="inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-2 py-2 w-32 hover:bg-orange-500 duration-500" type="button" onClick={handleClickEdit}>Editar</button>
-            <button className="inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-2 py-2 w-32 hover:bg-orange-500 duration-500" type="button" onClick={() => setShowModal(true)}>Remover</button>
+            <button className="inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-2 py-2 w-32 hover:bg-orange-500 duration-500 mr-1" type="button" onClick={handleClickEdit}>Editar Conta</button>
+            <button className="inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-2 py-2 w-32 hover:bg-orange-500 duration-500 ml-1" type="button" onClick={() => setShowModal(true)}>Excluir Conta</button>
           </div>
                       
           <Modal show={showModal} onClose={() => setShowModal(false)}>

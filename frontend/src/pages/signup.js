@@ -40,10 +40,6 @@ export default function Signup() {
       if(field_username.classList.contains('sm_c:border-[rgb(255,0,50)]'))
         field_username.classList.remove('sm_c:border-[rgb(255,0,50)]')
       field_username.classList.add('sm_c:border-[rgb(10,255,100)]')
-      return new Promise<Boolean>(true)
-    }
-    else{
-      return new Promise<Boolean>(false)
     }
 
   }
@@ -57,28 +53,25 @@ export default function Signup() {
       field_email.classList.remove('sm_c:border-brow_pod-1')
       field_email.classList.add('sm_c:border-[rgb(255,0,50)]') 
     })
-    console.log(res.status)
+
     if(res.status === 200){
       field_email.classList.remove('sm_c:border-brow_pod-1')
       if(field_email.classList.contains('sm_c:border-[rgb(255,0,50)]'))
         field_email.classList.remove('sm_c:border-[rgb(255,0,50)]')
       field_email.classList.add('sm_c:border-[rgb(10,255,100)]')
-      return new Promise<Boolean>(true)
-    }
-    else{
-      return new Promise<Boolean>(false)
     }
 
   }
 
   async function handleClickSignUp(dados) {
-    const dateFake = moment(startDate).format('DD/MM/YYYY')
+    document.getElementById('error-signup-div').style.display = 'hidden'
     var validationFail = false
     await testeLogin().catch((error) => {
+      console.log(error)
       validationFail = true
     });
-    await testeEmail().catch(() => {
-      
+    await testeEmail().catch((error) => {
+      console.log(error)
       validationFail = true
     });
     if(validationFail){
@@ -86,7 +79,9 @@ export default function Signup() {
       document.getElementById('error-signup-div').focus()
       return
     }
-    document.getElementById('error-signup-div').style.display = 'hidden'
+    
+    const dateFake = moment(startDate).format('DD/MM/YYYY')
+    
     await axios.post("http://localhost:3030/signup", {
       login: dados.username,
       senha: dados.password,
