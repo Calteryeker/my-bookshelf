@@ -3,7 +3,7 @@ export default function BookInfo({book}){
     const generos = (lista_generos) => {
         return (
             lista_generos.map(genero => (
-                <li key={genero} className="bg-romantic-1 text-brow_pod-1 justify-center text-[14px] m-1 sm_c:text-[20px] h-[30px] font-inter list-disc">
+                <li key={genero} className="bg-romantic-1 text-brow_pod-1 justify-center  m-1 sm_c:text-[15px] md_c:text-[20px] h-[30px] w-[13em] font-inter list-disc">
                     {genero}
                 </li>
             ))
@@ -13,39 +13,39 @@ export default function BookInfo({book}){
     return book ? (
         <div className="mt-20">
             <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center text-[14px] sm_c:text-[25px] h-[50px] font-luck w-full">
+                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Título:
                 </span> 
-                <span className="bg-romantic-1 text-brow_pod-1 justify-center text-[14px] sm_c:text-[25px] h-[50px] font-inter w-full">
+                <span className="bg-romantic-1 text-brow_pod-1 justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-inter w-full px-1">
                     {book.titulo}
                 </span>
             </div>
             <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center text-[14px] sm_c:text-[25px] h-[50px] font-luck w-full">
+                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Autor: 
                 </span>
-                <span className="bg-romantic-1 text-brow_pod-1 justify-center text-[14px] sm_c:text-[25px] h-[50px] font-inter w-full">
+                <span className="bg-romantic-1 text-brow_pod-1 justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-inter w-full px-1">
                     {book.autor}
                 </span>
             </div>
             <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center text-[14px] sm_c:text-[25px] h-[50px] font-luck w-full">
+                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Ano de Publicação:
                 </span>
-                <span className="bg-romantic-1 text-brow_pod-1 justify-center text-[14px] sm_c:text-[25px] h-[50px] font-inter w-full">
+                <span className="bg-romantic-1 text-brow_pod-1 justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-inter w-full px-1">
                     {book.ano_publicacao}
                 </span>
             </div>
             <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center text-[14px] sm_c:text-[25px] h-[50px] font-luck w-full">
+                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Descrição:
                 </span>
-                <span className="bg-romantic-1 text-brow_pod-1 justify-center text-justify text-[14px] sm_c:text-[25px] h-[50px] font-inter w-full">
+                <span className="bg-romantic-1 text-brow_pod-1 justify-center text-justify  sm_c:text-[20px] md_c:text-[25px] h-[50px] font-inter w-full px-1">
                     {book.descricao}
                 </span>
             </div>
             <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center text-[14px] sm_c:text-[25px] h-[50px] font-luck w-full">
+                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Gêneros:
                 </span>
                 <span className="justify-center">
@@ -53,10 +53,10 @@ export default function BookInfo({book}){
                 </span>
             </div>
             <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center text-[14px] sm_c:text-[25px] h-[50px] font-luck w-full">
+                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Avaliação:
                 </span>
-                <span className="bg-romantic-1 text-brow_pod-1 justify-center text-[14px] sm_c:text-[25px] h-[50px] font-inter w-full">
+                <span className="bg-romantic-1 text-brow_pod-1 justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-inter w-full px-1">
                     {book.avaliacao}
                 </span>
             </div>

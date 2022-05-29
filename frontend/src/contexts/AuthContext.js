@@ -41,6 +41,9 @@ export function AuthProvider({ children }) {
     
             Router.push('/home');
 
+        }).catch(() => {
+            document.getElementById('error-login-div').style.display = 'block'
+            document.getElementById('error-login').innerText = "Falha no login username/email ou senha incorretos!"
         });
     };
 

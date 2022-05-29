@@ -3,6 +3,7 @@ import Head from "next/head";
 import Footer from "../../components/Footer";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Modal from "../../components/Modal"
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { parseCookies, destroyCookie } from "nookies";
 import { useContext, useState } from "react"
@@ -18,23 +19,29 @@ export default function AccountEdit() {
   const { user } = useContext(AuthContext)
   const router = useRouter()
   const [startDate, setStartDate] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const now = new Date()
   const maxDate = new Date(now.getFullYear()-8, 11, 31)
   
   const validationEdit = yup.object().shape({
-    name: yup.string().required("Campo NOME é obrigatório!"),
-    actual_password: yup.string().min(8, "Senha deve ter 8 caracteres!"),
-    new_password: yup.string().min(8, "Senha deve ter 8 caracteres!"),
+    name: yup.string().required("Campo NOME é obrigatório!").max(50, "Nome deve ter no máximo 50 caracteres!"),
+    actual_password: yup.string().min(8, "Senha deve ter 8 caracteres!").max(20, "Tamanho máximo da senha é de 20 caracteres!"),
+    new_password: yup.string().min(8, "Senha deve ter 8 caracteres!").max(20, "Tamanho máximo da senha é de 20 caracteres!"),
     confirmPassword: yup.string().oneOf([yup.ref("new_password"), null], "As senhas não são iguais!"),
-    email: yup.string().email().required("Campo EMAIL é obrigatório!"),
+    email: yup.string().email("Insira um email válido!").required("Campo EMAIL é obrigatório!"),
   });
 
   async function handleClickEdit(dados) {
     const { ['mybookshelf-token']: token } = parseCookies();
     const dateFake = moment(startDate).format('DD/MM/YYYY')
-
     if (dados.actual_password) {
+      if(dados.new_password === ''){
+        setShowModal(true)
+        setSuccess(false)
+        return
+      }
       await axios.put("http://localhost:3030/u/profile/edit", {
         senhaAntiga: dados.actual_password,
         novaSenha: dados.new_password,
@@ -46,9 +53,14 @@ export default function AccountEdit() {
           'Authorizathion': `Bearer ${token}`
         }
       }).then((response) => {
-        destroyCookie(undefined, 'mybookshelf-token');
-        router.replace('/')
-        console.log(response.status)
+        if(response.status === 200){
+          destroyCookie(undefined, 'mybookshelf-token');
+          setSuccess(true)
+          setShowModal(true)  
+        }
+      }).catch(() => {
+        setSuccess(false)
+        setShowModal(true)
       })
     }
     else {
@@ -61,8 +73,15 @@ export default function AccountEdit() {
           'Authorizathion': `Bearer ${token}`
         }
       }).then((response) => {
-        router.replace('/profile/view');
-        console.log(response.status)
+        if(response.status === 200){
+          setSuccess(true)
+          setShowModal(true)  
+        }
+      }).catch((error) => {
+        console.log(error)
+        setSuccess(false)
+        setShowModal(true)
+        
       })
     }
 
@@ -74,6 +93,17 @@ export default function AccountEdit() {
 
   const handleReturn = () => {
     router.replace(`/profile/view`);
+  }
+
+  const handleSuccess = () => {
+    setShowModal(false)
+    if(document.getElementById('new-password').value === ''){
+      router.replace('/profile/view').then(() => router.reload())
+      
+    }
+    else{
+      router.replace('/')
+    }
   }
 
   return !user ? <h1>Carregando ...</h1> :(
@@ -114,8 +144,8 @@ export default function AccountEdit() {
               <div className="">
                 <label className="">
                   <p>Nova Senha:</p>
-                  <Field type="password" name="new_password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua senha" />
-                  <ErrorMessage component="P" name="new_password" className="text-xs text-red-700 text-center" />
+                  <Field id="new-password" type="password" name="new_password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua senha" />
+                  <ErrorMessage id="error-new-password" component="P" name="new_password" className="text-xs text-red-700 text-center" />
                 </label>
               </div>
               <div className="">
@@ -128,7 +158,7 @@ export default function AccountEdit() {
               <div className="">
                 <label className="">
                   <p>Data de nascimento:</p>
-                  <DatePicker showYearDropdown adjustDateOnChange dropdownMode="select" name="birthdate" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" selected={startDate ? startDate : moment(user.data_nascimento).toDate()} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} maxDate={maxDate}/>
+                  <DatePicker showYearDropdown adjustDateOnChange dropdownMode="select" name="birthdate" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" selected={startDate ? startDate : setStartDate(moment(user.data_nascimento).toDate())} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} maxDate={maxDate}/>
                   <ErrorMessage component="P" name="birthdate" className="text-xs text-red-700 text-center" />
                 </label>
               </div>
@@ -138,6 +168,18 @@ export default function AccountEdit() {
 
             </Form>
           </Formik>
+
+          {
+            success ? 
+            <Modal show={showModal} textClose={document.getElementById('new-password').value === '' ? "Continuar Editando" : "Logar Novamente"} onClose={document.getElementById('new-password').value != '' ? router.replace('/') : () => {setShowModal(false)}} onAction={handleSuccess}>
+                <h3>Edições salvas!</h3>
+            </Modal>
+            :
+            <Modal show={showModal} textClose={"Tentar Novamente"} onClose={() => setShowModal(false)}>
+                <h3>Erro ao salvar!</h3>
+                
+            </Modal>
+          }
         </div>
         <Footer />
       </div>

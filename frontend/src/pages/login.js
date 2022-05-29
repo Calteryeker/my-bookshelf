@@ -31,6 +31,9 @@ export default function Login() {
                     <Form className="items-center flex flex-col">
                         <img src="/images/logo_bg_brow.png" className="mx-auto mt-10" width={80} height={80} />
                         <h2 className="font-luck text-brow_pod-1 text-center text-3xl my-4">Fazer Acesso</h2>
+                        <div id='error-login-div'className="hidden bg-red-700 bg-opacity-10 mx-10 my-2 rounded-xl">
+                            <p id='error-login'className="block text-xm text-red-700 text-center"></p>
+                        </div>
                         <div className="mb-5">
                             <label className="">
                                 <Field name="username" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite seu username/email" />

@@ -14,8 +14,8 @@ export default function BookCreate() {
     const maxYear = dataAtual.getFullYear()
 
     const validationEdit = yup.object().shape({
-        title: yup.string().required("Campo Título é obrigatório!"),
-        author: yup.string().required("Campo Autor é obrigatório!"),
+        title: yup.string().required("Campo Título é obrigatório!").max(60, "Título deve ter no máximo 60 caracteres!"),
+        author: yup.string().required("Campo Autor é obrigatório!").max(50, "Autor deve ter no máximo 50 caracteres!"),
         year: yup.number().max(maxYear, `Ano máximo é ${maxYear}`).positive("Formato de ano inválido").required("Campo Ano é obrigatório!"),
         description: yup.string().required("Descrição ou Resumo é obrigatório!").max(200, "Descrição não pode ter mais de 200 caracteres"),
         genres: yup.array().of(yup.string().required("Gênero não pode ser vazio!")).min(1, "Um Gênero é obrigatório!"),
@@ -107,7 +107,7 @@ export default function BookCreate() {
                                     <p>Gêneros:</p>
                                     <FieldArray name="genres" >
                                         {fieldArrayProps => {
-                                            const {remove, push, form} = fieldArrayProps;
+                                            const { remove, push, form } = fieldArrayProps;
                                             const { values } = form
                                             const { genres } = values
 
@@ -117,7 +117,7 @@ export default function BookCreate() {
                                                         <label key={index} className="block m-1">
                                                             <Field name={`genres[${index}]`} className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder={`Gênero ${index+1}`}/>
                                                             {index != 0 ? <button type="button" onClick={() => remove(index)}>-</button> : null}
-                                                            <button type="button" onClick={() => push('')}>+</button>
+                                                            {Object.keys(genres).length < 5 ? <button type="button" onClick={() => push('')}>+</button> : null}
                                                         </label>
                                                     ))}
                                                 </>
