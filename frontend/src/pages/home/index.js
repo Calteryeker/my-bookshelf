@@ -181,7 +181,7 @@ export default function Index() {
           <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded} css_componente={"sm_c:mt-14 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-6 sm_c:bg-brow_pod-1 md_c:shadow-lg md_c:shadow-brow_pod-1 md_c:bg-white md_c:w-[90%] md_c:mx-2 "} css_title={"sm_c:mb-2 sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-xl md_c:text-brow_pod-1 md_c:mx-5"} css_ul={"sm_c:text-romantic-1 sm_c:font-inter md_c:text-sm md_c:font-bold md_c:text-brow_pod-1 md_c:leading-loose"} />
         </div>
         
-        <div className=" md_c:shadow-local md_c:min-h-screen  md_c:w-full md_c:pt-16 flex flex-col bg-section-logo-2 bg-romantic-1">
+        <div className=" md_c:min-h-screen  md_c:w-full md_c:pt-16 flex flex-col bg-section-logo-2 bg-romantic-1">
           <p className="sm_c:hidden md_c:block flex flex-col mx-auto font-luck text-4xl text-brow_pod-1">Dashboard</p>
           <div className=" sm_c:font-luck sm_c:mx-auto sm_c:flex sm_c:flex-row sm_c:my-10  ">
             <div className="sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-cyan-300 sm_c:hover:bg-sky-500  sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-6 md_c:mx-2 ">
