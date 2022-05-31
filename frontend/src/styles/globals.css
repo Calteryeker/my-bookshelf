@@ -11,4 +11,8 @@
   src: url("/frontend/public/fonts/Inter-VariableFont_slnt,wght.ttf");
   src: url("/frontend/public/fonts/Lekton-Regular.ttf");
   src: url("/frontend/public/fonts/LuckiestGuy-Regular.ttf");
-} 
+}
+
+.shadow-local{
+  box-shadow: 10px 5px 5px black;
+}
