@@ -46,4 +46,8 @@ routes.get('/b', AuthMiddleware, BookController.getBooks);
 //Rota para registro de mensagens dos usuários
 routes.post('/m', AuthMiddleware, SupportController.create);
 
+//Rotas para testar disponibilidade cadastro
+routes.post('/test/l', UserController.testLogin)
+routes.post('/test/e', UserController.testEmail)
+
 module.exports = routes;

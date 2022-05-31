@@ -3,7 +3,7 @@ import React from 'react';
 
 const Books = ({title, books, loading,css}) => {
   if (loading || !books) {
-    return <h2>Loading...</h2>;
+    return <h2>Carregando...</h2>;
   }
 
   return (

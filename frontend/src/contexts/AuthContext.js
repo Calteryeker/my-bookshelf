@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies } from 'nookies';
-import Router from "next/router";
-import Axios from "axios";
 import { recoverUser } from "../services/auth";
+import Router from "next/router";
+import axios from "axios";
 
 export const AuthContext = createContext({
     user: null,
@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     async function signIn(dados){
-        await Axios.post("http://localhost:3030/login", {
+        await axios.post("http://localhost:3030/login", {
             loginEmail: dados.username,
             senha: dados.password
         }).then(response => {
@@ -41,6 +41,9 @@ export function AuthProvider({ children }) {
     
             Router.push('/home');
 
+        }).catch(() => {
+            document.getElementById('error-login-div').style.display = 'block'
+            document.getElementById('error-login').innerText = "Falha no login username/email ou senha incorretos!"
         });
     };
 

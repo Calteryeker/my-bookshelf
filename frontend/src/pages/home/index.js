@@ -16,13 +16,14 @@ export default function Index() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [currentLocalPage, setCurrentLocalPage] = useState(1);
-  const [booksPerPage] = useState(20);
+  const [booksPerPage] = useState(1);
 
   const [title, setTitle] = useState("Meus Livros:");
-
   const [books, setBooks] = useState([]);
-  const [filteredBooks, setFilteredBooks] = useState([]);
+
+  const [filteredBooks, setFilteredBooks] = useState(undefined);
   const [filtering, setFiltering] = useState(false)
+  const [filter, setFilter] = useState("0");
 
   useEffect(() => {
     const fetchBooks = async (currentPage) => {
@@ -44,10 +45,12 @@ export default function Index() {
 
     fetchBooks(currentLocalPage)
   }, [])
-
-  //Livros não filtrados
+  
+  //Controle da páginação
   const indexLastBook = currentLocalPage * booksPerPage;
   const indexFirstBook = indexLastBook - booksPerPage;
+
+  //Livros não filtrados
   const currentBooks = books.slice(indexFirstBook, indexLastBook);
 
   var lastBooksAdded
@@ -59,45 +62,104 @@ export default function Index() {
   }
 
   //Livros filtrados
-  const currentFilteredBooks = filteredBooks.slice(indexFirstBook, indexLastBook)
+  const currentFilteredBooks = filteredBooks ? filteredBooks.slice(indexFirstBook, indexLastBook) : undefined
 
   const paginate = pageNumber => setCurrentLocalPage(pageNumber)
 
+  const handleLogout = () => {
+    destroyCookie(undefined, 'mybookshelf-token');
+    Router.replace('/')
+  }
+
+  function chargeLastBooks(lastBooks){
+    return (
+      lastBooks.map(book => (
+        <li key={book._id}>
+          <Link href={`/book/${book._id}/view`} >
+            <a className='list-group-item'>
+                {book.titulo}
+            </a>
+          </Link>
+        </li>
+      ))
+    )
+  }
+
+
   const myBooks = () => {
-    if (filtering) {
-
-    }
-    else {
-
-    }
-
     setTitle("Meus Livros:")
+
+    if (filtering){
+      searchWithFilter(document.getElementById("textFilter").value)
+    }
+    else{
+      setFilteredBooks(undefined)
+      console.log("meus livros")
+    }
   }
 
   const filterReading = () => {
-    if (filtering) {
-
-    }
-    else {
-
-    }
-
     setTitle("Em Leitura:")
+    if (filtering){
+      searchWithFilter(document.getElementById("textFilter").value)
+      setFilteredBooks(filteredBooks => filteredBooks.filter(book => book.estado === 1))
+    }
+    else{
+      setFilteredBooks(books.filter(book => book.estado === 1))
+    }
   }
 
   const filterFinished = () => {
-    if (filtering) {
-
-    }
-    else {
-
-    }
-
     setTitle("Finalizados:")
+    if (filtering){
+      searchWithFilter(document.getElementById("textFilter").value)
+      setFilteredBooks(filteredBooks => filteredBooks.filter(book => book.estado === 2))
+    }
+    else{
+      setFilteredBooks(books.filter(book => book.estado === 2))
+      
+    } 
   }
 
-  function searchWithFilter(filterType, text) {
+  function searchWithFilter(text){
+    setCurrentLocalPage(1);
+    const regex = new RegExp(text.toLowerCase())
+    
+    if(filter === "Gênero"){
+      setFilteredBooks(books.filter(book => book.lista_generos.filter(genero => regex.test(genero.toLowerCase())).length > 0))
+    }
+    else if(filter === "Autor"){
+      setFilteredBooks(books.filter(book => regex.test(book.autor.toLowerCase())))
+    }
+    else if(filter === "Ano"){
+      if(text == ''){
+        setFilteredBooks(books)
+        return
+      }
+      setFilteredBooks(books.filter(book => book.ano_publicacao == text))
+    }
+  }
 
+  function callFilter(){
+    const regex = new RegExp(title.toLowerCase())
+    if(regex.test("meus livros:")){
+      myBooks()
+    }
+    else if(regex.test("em leitura:")){
+      filterReading()
+    }
+    else if(regex.test("finalizados:")){
+      filterFinished()
+    }
+  }
+
+  function showFilterBar(){
+    setFiltering(true); 
+    callFilter()
+  }
+
+  function clearSearch(){
+    document.getElementById("textFilter").value = '';
   }
 
   return (
@@ -149,45 +211,45 @@ export default function Index() {
           <div className="sm_c:mx-auto sm_c:w-[370px] sm_c:mb-10 sm_c:py-4 sm_c:bg-brow_pod-1 sm_c:rounded-md sm_c:px-1 md_c:py-14 md_c:flex md_c:flex-col md_c:w-[750px] md_c:ml-auto md_c:rounded-2xl">
             <h1 className="font-luck text-white sm_c:flex sm_c:justify-center md_c:justify-start md_c:hidden">Filtros</h1>
             <div className="sm_c:px-2 sm_c:py-5 sm_c:bg-romantic-1 sm_c:rounded-md md_c:rounded-3xl md_c:align-top md_c:flex md_c:justify-center md_c:text-2xl md_c:mx-6 md_c:my-6 ">
-              <Formik initialValues={{ picked: -1 }} >
+              <Formik initialValues={{ picked: "0" }} >
                 {({ values }) => (
                   <Form >
 
-                    <div className="sm_c:flex sm_c:flex-row sm_c:justify-start" role="group" aria-labelledby="my-radio-group" onChange={() => setFiltering(true)}>
+                    <div className="sm_c:flex sm_c:flex-row sm_c:justify-start" role="group" aria-labelledby="my-radio-group" onClick={showFilterBar}>
 
                       <div className=" sm_c:mr-3 ">
                         <img src="/images/lupa.png" width={30} height={20} className="md_c:w-10" />
                       </div>
 
-                      <label className="sm_c:mr-2 font-luck ">
+                      <label className="sm_c:mr-2 font-luck" onClick={ setFilter(values.picked)}>
                         <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Gênero" />
                         Gênero
                       </label>
-                      <label className="sm_c:mr-2 font-luck">
+                      <label className="sm_c:mr-2 font-luck"  onClick={setFilter(values.picked)}>
                         <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Autor" />
                         Autor
                       </label>
-                      <label className="sm_c:mr-2 font-luck">
+                      <label className="sm_c:mr-2 font-luck"  onClick={setFilter(values.picked)}>
                         <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Ano" />
                         Ano
                       </label>
                       {
                         filtering ?
                           <label className="sm_c:text-sm sm_c:ml-1 ">
-                            <button className="sm_c:py-1 sm_c:px-1 sm_c:text-white sm_c:rounded-md sm_c:border-brow_pod-1 sm_c:border-2 sm_c:bg-brow_pod-1 md_c:justify-end md_c:ml-auto" type="button" onClick={() => { values.picked = -1; setFiltering(false) }}>Limpar Filtros</button>
+                            <button className="sm_c:py-1 sm_c:px-1 sm_c:text-white sm_c:rounded-md sm_c:border-brow_pod-1 sm_c:border-2 sm_c:bg-brow_pod-1 md_c:justify-end md_c:ml-auto" type="button" onClick={() => {values.picked = "0"; setFiltering(false); clearSearch(); callFilter()}}>Limpar Filtros</button>
                           </label> : null
                       }
                     </div>
                     {
-                      filtering ? <input className=" sm_c:mt-5 sm_c:px-2 sm_c:w-full sm_c:rounded-2xl sm_c:py-2 sm_c:border-brow_pod-1 sm_c:border-2 sm_c:font-inter md_c:mx-1 " id="textFilter" placeholder={`Digite o ${values.picked}`} onChange={() => searchWithFilter(values.picked, document.getElementById('textFilter').value)} /> : null
+                      filtering ? <input className=" sm_c:mt-5 sm_c:px-2 sm_c:w-full sm_c:rounded-2xl sm_c:py-2 sm_c:border-brow_pod-1 sm_c:border-2 sm_c:font-inter md_c:mx-1" id="textFilter" placeholder={`Digite o ${values.picked}`} autoComplete="off" onChange={() => callFilter()} /> : null
                     }
                   </Form>
                 )}
               </Formik>
             </div>
             <FilterStates status={"md_c:hidden"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
-            <Books title={title} books={filteredBooks.length > 0 ? currentfilteredBooks : currentBooks} loading={loading} />
-            <Pagination booksPerPage={booksPerPage} totalBooks={filteredBooks.length > 0 ? filteredBooks.length : books.length} paginate={paginate} />
+            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} />
+            <Pagination booksPerPage={booksPerPage} totalBooks={filteredBooks ? filteredBooks.length : books.length} paginate={paginate} />
           </div>
         </div>
       </div>
