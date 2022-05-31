@@ -96,7 +96,7 @@ export default function BookView(){
     : 
     (   
         <>
-            <div className="bg-romantic-1 flex flex-col justify-content align-center min-h-screen">  
+            <div className="bg-romantic-1 flex flex-col justify-between align-center min-h-screen w-full">  
                 <Head>
                     <title>MyBookshelf | Informações do Livro</title>
                     <link rel="icon" href="/logo.png" />
@@ -139,7 +139,7 @@ export default function BookView(){
                 </div>
                 
                 <Modal show={showModal} onClose={() => setShowModal(false)} onAction={() => deleteBook(id)}>
-                    <div className="text-lg leading-6 font-medium text-gray-900">
+                    <div className="text-lg leading-6 font-medium text-gray-900 my-[7rem]">
                         <h3>Deseja remover o livro da sua bibilioteca?</h3>
                     </div>
                 </Modal> 

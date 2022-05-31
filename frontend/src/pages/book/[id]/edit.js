@@ -23,7 +23,7 @@ export default function BookEdit({book}) {
         author: yup.string().required("Campo Autor é obrigatório!").max(50, "Autor deve ter no máximo 50 caracteres!"),
         year: yup.number().max(maxYear, `Ano máximo é ${maxYear}`).positive("Formato de ano inválido").required("Campo Ano é obrigatório!"),
         description: yup.string().required("Descrição ou Resumo é obrigatório!").max(200, "Descrição não pode ter mais de 200 caracteres"),
-        genres: yup.array().of(yup.string().required("Gênero não pode ser vazio!")).min(1, "Um Gênero é obrigatório!"),
+        genres: yup.array().of(yup.string().max(15, "Tamanho máximo de 15 caracteres!").required("Gênero não pode ser vazio!")).min(1, "Um Gênero é obrigatório!"),
         rating: yup.number().max(5, "Avaliação deve ser menor que 5").positive("Avaliaçao deve ser um número positivo").required("Campo Avaliação é obrigatório!"),
 
     });
@@ -62,6 +62,18 @@ export default function BookEdit({book}) {
         description: descricao,
         genres: lista_generos,
         rating: avaliacao
+    }
+
+    function validateGenre(input){
+        if(input != undefined){
+            if(input  === ''){
+                return "Gênero não pode ser vazio!"
+            }
+            else if(input.lenght > 15){
+                return "Tamanho máximo de 15 caracteres!"
+            }
+        }
+        
     }
 
     return (
@@ -118,16 +130,16 @@ export default function BookEdit({book}) {
                                                 <>
                                                     {genres.map((genre, index) => (
                                                         <label key={index} className="block m-1">
-                                                            <Field name={`genres[${index}]`} className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder={`Gênero ${index+1}`}/>
+                                                            <Field name={`genres[${index}]`} className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder={`Gênero ${index+1}`} validate={(input) => validateGenre(input)}/>
                                                             {index != 0 ? <button type="button" onClick={() => remove(index)}>-</button> : null}
                                                             {Object.keys(genres).length < 5 ? <button type="button" onClick={() => push('')}>+</button> : null}
+                                                            <ErrorMessage component="p" name={`genres[${index}]`} className="text-xs text-red-700 text-center"></ErrorMessage>
                                                         </label>
                                                     ))}
                                                 </>
                                             )
                                         }}
                                     </FieldArray>
-                                    <ErrorMessage name="genres"  >{msg => msg ? <p className="text-xs text-red-700 text-center">Gênero não pode ser vazio</p> : null}</ErrorMessage>
                                 </label>
                             </div>
                             <div className="">

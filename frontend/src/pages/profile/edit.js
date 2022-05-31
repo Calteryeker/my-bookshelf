@@ -242,7 +242,7 @@ export default function AccountEdit() {
 
           {
             success ? 
-            <Modal show={showModal} textClose={document.getElementById('new-password').value === '' ? "Continuar Editando" : "Logar Novamente"} onClose={document.getElementById('new-password').value != '' ? () => router.replace('/login') : () => {setShowModal(false)}} onAction={handleSuccess}>
+            <Modal show={showModal} textClose={document.getElementById('new-password').value === '' ? "Continuar Editando" : "Logar Novamente"} onClose={document.getElementById('new-password').value != '' ? () => {destroyCookie(undefined, 'mybookshelf-token'); router.replace('/login')} : () => {setShowModal(false)}} onAction={handleSuccess}>
                 <div className="text-xl leading-6 font-medium text-gray-900 my-[7rem]">
                   <h3>Edições salvas!</h3>
                 </div>

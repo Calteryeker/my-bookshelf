@@ -80,7 +80,7 @@ export default function ProfileView() {
           </div>
                       
           <Modal show={showModal} onClose={() => setShowModal(false)}>
-            <div className="px-2">
+            <div className="px-2 my-[7rem]">
               <h3 className="text-lg leading-6 font-medium text-gray-900 px-2">Deseja excluir permanentemente sua conta?</h3>
               <Formik initialValues={{}} validationSchema={validationDelete} onSubmit={deleteAccount}>
                 <Form className="signup-form">

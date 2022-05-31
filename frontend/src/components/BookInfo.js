@@ -12,7 +12,7 @@ export default function BookInfo({book}){
 
     return book ? (
         <div className="mt-20">
-            <div className="px-10">
+            <div className="px-3">
                 <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Título:
                 </span> 
@@ -20,7 +20,7 @@ export default function BookInfo({book}){
                     {book.titulo}
                 </span>
             </div>
-            <div className="px-10">
+            <div className="px-3">
                 <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Autor: 
                 </span>
@@ -28,15 +28,15 @@ export default function BookInfo({book}){
                     {book.autor}
                 </span>
             </div>
-            <div className="px-10">
-                <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
-                    Ano de Publicação:
+            <div className="px-3">
+                <span className="tracking-[7px] bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full pl-2">
+                    Ano:
                 </span>
                 <span className="bg-romantic-1 text-brow_pod-1 justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-inter w-full px-1">
                     {book.ano_publicacao}
                 </span>
             </div>
-            <div className="px-10">
+            <div className="px-3">
                 <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Descrição:
                 </span>
@@ -44,7 +44,7 @@ export default function BookInfo({book}){
                     {book.descricao}
                 </span>
             </div>
-            <div className="px-10">
+            <div className="px-3">
                 <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Gêneros:
                 </span>
@@ -52,7 +52,7 @@ export default function BookInfo({book}){
                     <ul className="flex flex-col px-20 ">{generos(book.lista_generos)}</ul>
                 </span>
             </div>
-            <div className="px-10">
+            <div className="px-3">
                 <span className="bg-brow_pod-1 text-white justify-center sm_c:text-[20px] md_c:text-[25px] h-[50px] font-luck w-full px-1">
                     Avaliação:
                 </span>
