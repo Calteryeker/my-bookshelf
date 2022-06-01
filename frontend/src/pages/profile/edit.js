@@ -174,6 +174,25 @@ export default function AccountEdit() {
 
   }
 
+  function showFieldsSenha(values){
+    const chck = document.getElementById('checkbox-senha')
+    const fieldsSenha = document.getElementById('trocarSenha')
+    if(chck.checked){
+      fieldsSenha.classList.remove('hidden')
+    }
+    else{
+      fieldsSenha.classList.add('hidden')
+    }
+
+    document.getElementById('actual-password').value = ''
+    document.getElementById('new-password').value = ''
+    document.getElementById('confirm-password').value = ''
+
+    values.actual_password = ''
+    values.new_password = ''
+    values.confirmPassword = ''
+  }
+
   return !user ? <h1>Carregando ...</h1> :(
     <>
       <div className="pt-28 flex flex-col justify-between bg-romantic-1 min-h-screen">
@@ -186,58 +205,69 @@ export default function AccountEdit() {
         </Header>
         <div className="flex flex-col items-center my-10 bg-white rounded-2xl mx-auto w-96 pb-10 md_c:w-[500px] md_c:mx-auto md_c:mb-10">
           <Formik initialValues={{name: user.nome, email: user.email, actual_password: '', new_password : '', confirmPassword: '', birthdate: moment(user.data_nascimento).toDate()}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
-            <Form className="items-center flex flex-col mt-10">
-              <img className="mx-auto" width={80} height={80} src="/images/logo_bg_brow.png" />
-              <div id='error-edit-div'className="hidden bg-red-700 bg-opacity-10 mx-10 my-2 rounded-xl">
-                <p id='error-edit'className="block text-xm text-red-700 text-center px-2">Email já cadastrado!</p>
-              </div>
-              <div className="mt-5">
-                <label className="">
-                  <p>Nome Completo:</p>
-                  <Field name="name" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite seu nome" />
-                  <ErrorMessage component="p" name="name" className="text-xs text-red-700 text-center" />
-                </label>
-              </div>
-              <div className="">
-                <label className="">
-                  <p>Email:</p>
-                  <Field id="field-email" name="email" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite seu email" />
-                  <ErrorMessage component="P" name="email" className="text-xs text-red-700 text-center" />
-                </label>
-              </div>
-              <div className="">
-                <label className="">
-                  <p>Senha Atual:</p>
-                  <Field id="actual-password" type="password" name="actual_password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua senha" validate={validatePasswords}/>
-                  <ErrorMessage component="P" name="actual_password" className="text-xs text-red-700 text-center" />
-                </label>
-              </div>
-              <div className="">
-                <label className="">
-                  <p>Nova Senha:</p>
-                  <Field id="new-password" type="password" name="new_password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua nova senha" validate={validatePasswords}/>
-                  <ErrorMessage id="error-new-password" component="P" name="new_password" className="text-xs text-red-700 text-center" />
-                </label>
-              </div>
-              <div className="">
-                <label className="">
-                  <p>Confirmar Senha:</p>
-                  <Field type="password" name="confirmPassword" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Confirme sua nova senha" />
-                  <ErrorMessage component="P" name="confirmPassword" className="text-xs text-red-700 text-center" />
-                </label>
-              </div>
-              <div className="">
-                <label className="">
-                  <p>Data de nascimento:</p>
-                  <DatePicker showYearDropdown adjustDateOnChange dropdownMode="select" name="birthdate" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" selected={startDate ? startDate : setStartDate(moment(user.data_nascimento).toDate())} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} maxDate={maxDate}/>
-                  <ErrorMessage component="P" name="birthdate" className="text-xs text-red-700 text-center" />
-                </label>
-              </div>
-              <button className="rounded-xl bg-romantic-1 text-brow_pod-1 font-luck text-xl px-4 py-2 mt-10 hover:bg-orange-500 hover:text-white duration-500" type="submit">
-                Confirmar
-              </button>
+            {({values}) => (
+              <Form className="items-center flex flex-col mt-10">
+                
+                <img className="mx-auto" width={80} height={80} src="/images/logo_bg_brow.png" />
+                <div id='error-edit-div'className="hidden bg-red-700 bg-opacity-10 mx-10 my-2 rounded-xl">
+                  <p id='error-edit'className="block text-xm text-red-700 text-center px-2">Email já cadastrado!</p>
+                </div>
+                <div className="mt-5">
+                  <label className="">
+                    <p>Nome Completo:</p>
+                    <Field name="name" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite seu nome" />
+                    <ErrorMessage component="p" name="name" className="text-xs text-red-700 text-center" />
+                  </label>
+                </div>
+                <div className="">
+                  <label className="">
+                    <p>Email:</p>
+                    <Field id="field-email" name="email" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite seu email" />
+                    <ErrorMessage component="P" name="email" className="text-xs text-red-700 text-center" />
+                  </label>
+                </div>
+                <div>
+                  <label for={'checkbox-senha'} onClick={() => showFieldsSenha(values)}>Alterar Senha
+                    <input id="checkbox-senha" type={'checkbox'} className="mt-3 ml-2"></input>
+                  </label>  
+                </div>
+                <div id="trocarSenha" className="hidden">
+                  <div className="">
+                    <label className="">
+                      <p>Senha Atual:</p>
+                      <Field id="actual-password" type="password" name="actual_password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua senha" validate={validatePasswords}/>
+                      <ErrorMessage component="P" name="actual_password" className="text-xs text-red-700 text-center" />
+                    </label>
+                  </div>
+                  <div className="">
+                    <label className="">
+                      <p>Nova Senha:</p>
+                      <Field id="new-password" type="password" name="new_password" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Digite sua nova senha" validate={validatePasswords}/>
+                      <ErrorMessage id="error-new-password" component="P" name="new_password" className="text-xs text-red-700 text-center" />
+                    </label>
+                  </div>
+                  <div className="">
+                    <label className="">
+                      <p>Confirmar Senha:</p>
+                      <Field id='confirm-password' type="password" name="confirmPassword" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Confirme sua nova senha" />
+                      <ErrorMessage component="P" name="confirmPassword" className="text-xs text-red-700 text-center" />
+                    </label>
+                  </div>
+                </div>
+                
+                <div className="">
+                  <label className="">
+                    <p>Data de nascimento:</p>
+                    <DatePicker showYearDropdown adjustDateOnChange dropdownMode="select" name="birthdate" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" selected={startDate ? startDate : setStartDate(moment(user.data_nascimento).toDate())} onChange={(date) => setStartDate(date)} inline={false} dateFormat="dd/MM/yyyy" onClickOutside={testDate} onCalendarClose={testDate} maxDate={maxDate}/>
+                    <ErrorMessage component="P" name="birthdate" className="text-xs text-red-700 text-center" />
+                  </label>
+                </div>
+                <button className="rounded-xl bg-romantic-1 text-brow_pod-1 font-luck text-xl px-4 py-2 mt-10 hover:bg-orange-500 hover:text-white duration-500" type="submit">
+                  Confirmar
+                </button>
 
-            </Form>
+              </Form>
+            )}
           </Formik>
 
           {
@@ -251,9 +281,7 @@ export default function AccountEdit() {
             <Modal show={showModal} textClose={"Tentar Novamente"} onClose={() => setShowModal(false)}>
               <div className="text-lg leading-6 font-medium text-gray-900 my-[7rem]">
                 <h3>Erro ao salvar!</h3>
-              </div>
-                
-                
+              </div>   
             </Modal>
           }
         </div>
