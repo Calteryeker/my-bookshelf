@@ -16,7 +16,7 @@ export default function Index() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [currentLocalPage, setCurrentLocalPage] = useState(1);
-  const [booksPerPage, setBooksPerPage] = useState(5);
+  const [booksPerPage, setBooksPerPage] = useState(1);
 
   const [title, setTitle] = useState("Meus Livros:");
   const [books, setBooks] = useState([]);
@@ -264,7 +264,7 @@ export default function Index() {
             </div>
             <FilterStates status={"md_c:hidden"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
             <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} css_componente={"sm_c:mt-8 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1"} css_title={"sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-[2em]"} css_ul={'flex flex-row mt-5 mx-3 font-luck sm_c:overflow-x-auto md_c:w-[42em]'} css_li={"hover:underline hover:decoration-red-700 hover:bg-romantic-1 hover:border-red-700 hover:text-brow_pod-1 border border-[3px] border-romantic-1 p-[1rem] text-white text-center items-center place-content-center h-[11em] w-[7.9em] sm_c:text-[1rem] sm_c:mx-1 "}/>
-            <Pagination booksPerPage={booksPerPage} totalBooks={filteredBooks ? filteredBooks.length : books.length} paginate={paginate} />
+            <Pagination currentPage={currentLocalPage} booksPerPage={booksPerPage} totalBooks={filteredBooks ? filteredBooks.length : books.length} paginate={paginate} />
           </div>
         </div>
       </div>
