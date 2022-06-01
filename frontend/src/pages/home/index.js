@@ -124,7 +124,10 @@ export default function Index() {
     setCurrentLocalPage(1);
     const regex = new RegExp(text.toLowerCase())
 
-    if (filter === "Gênero") {
+    if(filter === "Título"){
+      setFilteredBooks(books.filter(book => regex.test(book.titulo.toLowerCase())))
+    }
+    else if (filter === "Gênero") {
       setFilteredBooks(books.filter(book => book.lista_generos.filter(genero => regex.test(genero.toLowerCase())).length > 0))
     }
     else if (filter === "Autor") {
@@ -222,13 +225,17 @@ export default function Index() {
                 {({ values }) => (
                   <Form >
 
-                    <div className="sm_c:flex sm_c:flex-row sm_c:justify-start" role="group" aria-labelledby="my-radio-group">
+                    <div className="sm_c:flex sm_c:flex-wrap sm_c:justify-center" role="group" aria-labelledby="my-radio-group">
 
                       <div className=" sm_c:mr-3 ">
                         <img src="/images/lupa.png" width={30} height={20} className="md_c:w-10" />
                       </div>
 
                       <div onClick={() => showFilterBar()}>
+                        <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
+                          <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Título" />
+                          Título
+                        </label>
                         <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
                           <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Gênero" />
                           Gênero
@@ -243,8 +250,8 @@ export default function Index() {
                         </label>
                       </div>
 
-                      <label className="sm_c:text-sm sm_c:ml-1 ">
-                        <button className="hidden sm_c:py-1 sm_c:px-1 sm_c:text-white sm_c:rounded-md sm_c:border-brow_pod-1 sm_c:border-2 sm_c:bg-brow_pod-1 md_c:justify-end md_c:ml-auto" id='clearFilter' type="button" onClick={() => { values.picked = "0"; clearSearch(); callFilter() }}>Limpar Filtros</button>
+                      <label className="sm_c:text-sm sm_c:ml-1 sm_c:align-end">
+                        <button className="hidden sm_c:py-1 sm_c:px-1 sm_c:text-white sm_c:rounded-md sm_c:border-brow_pod-1 sm_c:border-2 sm_c:bg-brow_pod-1 sm_c:mt-5 md_c:justify-end md_c:ml-auto md_c:mt-0" id='clearFilter' type="button" onClick={() => { values.picked = "0"; clearSearch(); callFilter() }}>Limpar Filtros</button>
                       </label> 
                     </div>
                     

@@ -13,8 +13,8 @@ const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li})
           <h3 className={css_title}>{title}</h3>
           <ul className={css_ul}>
           {books.map(book => (
-              <Link href={`/book/${book._id}/view`}>
-                <a>
+              <Link key={book._id} href={`/book/${book._id}/view`}>
+                <a key={book._id}>
                   <li key={book._id} className={css_li}> 
                     {book.titulo.toUpperCase()}   
                   </li>
