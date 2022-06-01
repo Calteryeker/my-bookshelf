@@ -180,7 +180,7 @@ export default function Index() {
 
       <div className=" sm_c:pt-0 flex sm_c:flex-col sm_c:min-h-screen sm_c:items-center sm_c:justify-around sm_c:bg-romantic-1 overflow-hidden sm_c:mt-20 md_c:items-start md_c:flex-row md_c:justify-start md_c:bg-white" >
         <div className=" bg-romantic-1 md_c:flex md_c:flex-col md_c:align-top md_c:bg-white md_c:pt-20 md_c:w-[20%] md_c:min-h-screen ">
-          <div className="flex flex-row justify-start text-brow_pod-1 border border-orange-800 mx-9 rounded-lg py-3 ml-7 px-5 bg-romantic-1 text-[0.8em] hover:bg-green-700 hover:text-white" onClick={() => Router.push('book/create')}>
+          <div className="flex flex-row justify-start text-brow_pod-1 border border-orange-800 mx-9 rounded-lg py-3 ml-7 px-5 bg-romantic-1 text-[0.8em] hover:bg-green-700 hover:text-white cursor-pointer" onClick={() => Router.push('book/create')}>
             <img src="/images/plus.png" className='sm_c:hidden md_c:block  w-7 h-7' />
             <Link href="book/create"><button className="sm_c:hidden md_c:block md_c:mx-1 md_c:font-luck ">Novo Livro</button></Link>
           </div>
@@ -256,7 +256,7 @@ export default function Index() {
               
             </div>
             <FilterStates status={"md_c:hidden"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
-            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} css_componente={"sm_c:mt-8 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1"} css_title={"sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-[2em]"} css_ul={'flex flex-row mt-5 mx-3 font-luck sm_c:overflow-x-auto md_c:w-[42em]'} css_li={"hover:underline hover:decoration-red-700 hover:bg-romantic-1 hover:border-red-700 hover:text-brow_pod-1 border border-[3px] border-romantic-1 p-[1rem] text-white text-center items-center place-content-center shrink-0 h-[11em] w-[7.9em] sm_c:text-[1rem] sm_c:mx-1 "}/>
+            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} css_componente={"sm_c:mt-8 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1"} css_title={"sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-[2em]"} css_ul={'flex flex-row mt-5 mx-3 font-luck sm_c:overflow-x-auto md_c:w-[42em]'} css_li={"hover:underline hover:decoration-red-700 hover:bg-romantic-1 hover:border-red-700 hover:text-brow_pod-1 border border-[3px] border-romantic-1 p-[1rem] text-white text-center items-center place-content-center h-[11em] w-[7.9em] sm_c:text-[1rem] sm_c:mx-1 "}/>
             <Pagination booksPerPage={booksPerPage} totalBooks={filteredBooks ? filteredBooks.length : books.length} paginate={paginate} />
           </div>
         </div>

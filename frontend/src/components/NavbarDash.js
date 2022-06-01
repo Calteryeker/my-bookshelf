@@ -33,7 +33,7 @@ export default function Navbar({ bgColor, tittleColor, image, user }) {
                     </a>
                 </div>
 
-                <div className=" sm_c:absolute sm_c:right-1 sm_c:top-0  md_c:right-14 cursor-pointer ">
+                <div className=" sm_c:absolute sm_c:right-1 sm_c:top-0  md_c:right-14">
                     <div>
                         <button onClick={handleClick} type="button" className=" inline-flex sm_c:mt-5 sm_c:ml-20 border border-solid sm_c:ring-2 sm_c:ring-amber-600 border-romantic-1 sm_c:rounded-full" id="menu-button" aria-expanded="true" aria-haspopup="true">
                             <img src="/images/coruja.png" width={40} className='sm_c:w-[40px] md_c:w-[60px] ' />
@@ -41,8 +41,8 @@ export default function Navbar({ bgColor, tittleColor, image, user }) {
 
                     </div>
                     <div className='sm_c:text-sm sm_c:font-bold sm_c:font-lekton sm_c:items-end sm_c:text-romantic-1 sm_c:flex sm_c:flex-col sm_c:justify-end md_c:flex md_c:flex-col'>
-                        <h3>Bem Vindo(a)</h3>
-                        <h3>{username}</h3>
+                        <h3 onClick={handleClick} className="cursor-pointer">Bem Vindo(a)</h3>
+                        <h3 onClick={handleClick} className="cursor-pointer">{username}</h3>
                     </div>
                     {showOptions && (
                         <div className=" divide-y divide-gray-100 absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-brow_pod-1 ring-opacity-5 focus:outline-none " role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
