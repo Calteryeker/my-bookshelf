@@ -16,7 +16,7 @@ export default function Index() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [currentLocalPage, setCurrentLocalPage] = useState(1);
-  const [booksPerPage] = useState(1);
+  const [booksPerPage, setBooksPerPage] = useState(5);
 
   const [title, setTitle] = useState("Meus Livros:");
   const [books, setBooks] = useState([]);
@@ -30,7 +30,7 @@ export default function Index() {
       setLoading(true);
       const { ['mybookshelf-token']: token } = parseCookies();
 
-      const res = await Axios.get(`http://localhost:3030/b?page=${currentPage}`, {
+      const res = await Axios.get(`http://localhost:3030/b?page=1`, {
         headers: {
           'Authorizathion': `Bearer ${token}`,
         }
@@ -94,7 +94,6 @@ export default function Index() {
     }
     else {
       setFilteredBooks(undefined)
-      console.log("meus livros")
     }
   }
 
@@ -154,31 +153,39 @@ export default function Index() {
   }
 
   function showFilterBar() {
-    setFiltering(true);
+    document.getElementById("textFilter").classList.remove('hidden');
+    document.getElementById("clearFilter").classList.remove('hidden');
     callFilter()
+    setFiltering(true)
   }
 
   function clearSearch() {
-    document.getElementById("textFilter").value = '';
+    const textField = document.getElementById("textFilter")
+    textField.value = '';
+
+    textField.classList.add('hidden')
+    document.getElementById("clearFilter").classList.add('hidden')
+
+    setFiltering(false)
   }
 
   return (
     <>
+      
       <Head>
         <title>MyBookshelf | Home</title>
         <link rel="icon" href="/logo.png" />
       </Head>
-
       <NavbarDash bgColor={`brow_pod-1`} tittleColor={`white`} image={"logonova2.png"} user={user} />
 
-      <div className=" sm_c:pt-0 flex sm_c:flex-col sm_c:min-h-screen sm_c:items-center sm_c:justify-around sm_c:bg-romantic-1 overflow-hidden sm_c:mt-20 md_c:items-start md_c:flex-row md_c:justify-start md_c:bg-white  ">
+      <div className=" sm_c:pt-0 flex sm_c:flex-col sm_c:min-h-screen sm_c:items-center sm_c:justify-around sm_c:bg-romantic-1 overflow-hidden sm_c:mt-20 md_c:items-start md_c:flex-row md_c:justify-start md_c:bg-white" >
         <div className=" bg-romantic-1 md_c:flex md_c:flex-col md_c:align-top md_c:bg-white md_c:pt-20 md_c:w-[20%] md_c:min-h-screen ">
-          <div className="flex flex-row justify-start text-brow_pod-1 border border-orange-800 mx-9 rounded-lg py-3 ml-7 px-5 bg-romantic-1 text-[0.8em] hover:bg-green-700 hover:text-white">
+          <div className="flex flex-row justify-start text-brow_pod-1 border border-orange-800 mx-9 rounded-lg py-3 ml-7 px-5 bg-romantic-1 text-[0.8em] hover:bg-green-700 hover:text-white" onClick={() => Router.push('book/create')}>
             <img src="/images/plus.png" className='sm_c:hidden md_c:block  w-7 h-7' />
             <Link href="book/create"><button className="sm_c:hidden md_c:block md_c:mx-1 md_c:font-luck ">Novo Livro</button></Link>
           </div>
           <FilterStates status={"sm_c:hidden md_c:block md_c:font-luck"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
-          <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded} css_componente={"sm_c:mt-14 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-6 sm_c:bg-brow_pod-1 md_c:shadow-lg md_c:shadow-brow_pod-1 md_c:bg-white md_c:w-[90%] md_c:mx-2 "} css_title={"sm_c:mb-2 sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-xl md_c:text-brow_pod-1 md_c:mx-5"} css_ul={"sm_c:text-romantic-1 sm_c:font-inter md_c:text-sm md_c:font-bold md_c:text-brow_pod-1 md_c:leading-loose"} />
+          <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded} css_componente={"sm_c:mt-14 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-6 sm_c:bg-brow_pod-1 md_c:shadow-lg md_c:shadow-brow_pod-1 md_c:bg-white md_c:w-[90%] md_c:mx-2 "} css_title={"sm_c:mb-2 sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-xl md_c:text-brow_pod-1 md_c:mx-5"} css_ul={"sm_c:text-romantic-1 sm_c:font-inter md_c:text-sm md_c:font-bold md_c:text-brow_pod-1 md_c:leading-loose"} css_li={'hover:underline'}/>
         </div>
         
         <div className=" md_c:min-h-screen  md_c:w-full md_c:pt-16 flex flex-col bg-section-logo-2 bg-romantic-1">
@@ -209,46 +216,47 @@ export default function Index() {
           </div>
 
           <div className="sm_c:mx-auto sm_c:w-[370px] sm_c:mb-10 sm_c:py-4 sm_c:bg-brow_pod-1 sm_c:rounded-md sm_c:px-1 md_c:py-14 md_c:flex md_c:flex-col md_c:w-[750px] md_c:ml-auto md_c:rounded-2xl">
-            <h1 className="font-luck text-white sm_c:flex sm_c:justify-center md_c:justify-start md_c:hidden">Filtros</h1>
+            <h3 className="font-luck text-white sm_c:flex sm_c:justify-center md_c:justify-start md_c:hidden">Filtros</h3>
             <div className="sm_c:px-2 sm_c:py-5 sm_c:bg-romantic-1 sm_c:rounded-md md_c:rounded-3xl md_c:align-top md_c:flex md_c:justify-center md_c:text-2xl md_c:mx-6 md_c:my-6 ">
               <Formik initialValues={{ picked: "0" }} >
                 {({ values }) => (
                   <Form >
 
-                    <div className="sm_c:flex sm_c:flex-row sm_c:justify-start" role="group" aria-labelledby="my-radio-group" onClick={showFilterBar}>
+                    <div className="sm_c:flex sm_c:flex-row sm_c:justify-start" role="group" aria-labelledby="my-radio-group">
 
                       <div className=" sm_c:mr-3 ">
                         <img src="/images/lupa.png" width={30} height={20} className="md_c:w-10" />
                       </div>
 
-                      <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
-                        <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Gênero" />
-                        Gênero
-                      </label>
-                      <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
-                        <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Autor" />
-                        Autor
-                      </label>
-                      <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
-                        <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Ano" />
-                        Ano
-                      </label>
-                      {
-                        filtering ?
-                          <label className="sm_c:text-sm sm_c:ml-1 ">
-                            <button className="sm_c:py-1 sm_c:px-1 sm_c:text-white sm_c:rounded-md sm_c:border-brow_pod-1 sm_c:border-2 sm_c:bg-brow_pod-1 md_c:justify-end md_c:ml-auto" type="button" onClick={() => { values.picked = "0"; setFiltering(false); clearSearch(); callFilter() }}>Limpar Filtros</button>
-                          </label> : null
-                      }
+                      <div onClick={() => showFilterBar()}>
+                        <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
+                          <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Gênero" />
+                          Gênero
+                        </label>
+                        <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
+                          <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Autor" />
+                          Autor
+                        </label>
+                        <label className="sm_c:mr-2 font-luck" onClick={setFilter(values.picked)}>
+                          <Field className="sm_c:mr-0 md_c:mr-2" type="radio" name="picked" value="Ano" />
+                          Ano
+                        </label>
+                      </div>
+
+                      <label className="sm_c:text-sm sm_c:ml-1 ">
+                        <button className="hidden sm_c:py-1 sm_c:px-1 sm_c:text-white sm_c:rounded-md sm_c:border-brow_pod-1 sm_c:border-2 sm_c:bg-brow_pod-1 md_c:justify-end md_c:ml-auto" id='clearFilter' type="button" onClick={() => { values.picked = "0"; clearSearch(); callFilter() }}>Limpar Filtros</button>
+                      </label> 
                     </div>
-                    {
-                      filtering ? <input className=" sm_c:mt-5 sm_c:px-2 sm_c:w-full sm_c:rounded-2xl sm_c:py-2 sm_c:border-brow_pod-1 sm_c:border-2 sm_c:font-inter md_c:mx-1" id="textFilter" placeholder={`Digite o ${values.picked}`} autoComplete="off" onChange={() => callFilter()} /> : null
-                    }
+                    
+                    <input className="hidden sm_c:mt-5 sm_c:px-2 sm_c:w-full sm_c:rounded-2xl sm_c:py-2 sm_c:border-brow_pod-1 sm_c:border-2 sm_c:font-inter md_c:mx-1" id="textFilter" placeholder={`Digite o ${values.picked}`} autoComplete="off" onChange={() => callFilter()} />
+                    
                   </Form>
                 )}
               </Formik>
+              
             </div>
             <FilterStates status={"md_c:hidden"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
-            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} css_componente={"sm_c:mt-14 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1"} css_title={"sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-lg"} />
+            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} css_componente={"sm_c:mt-8 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1"} css_title={"sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-[2em]"} css_ul={'flex flex-row mt-5 mx-3 font-luck sm_c:overflow-x-auto md_c:w-[42em]'} css_li={"hover:underline hover:decoration-red-700 hover:bg-romantic-1 hover:border-red-700 hover:text-brow_pod-1 border border-[3px] border-romantic-1 p-[1rem] text-white text-center items-center place-content-center shrink-0 h-[11em] w-[7.9em] sm_c:text-[1rem] sm_c:mx-1 "}/>
             <Pagination booksPerPage={booksPerPage} totalBooks={filteredBooks ? filteredBooks.length : books.length} paginate={paginate} />
           </div>
         </div>

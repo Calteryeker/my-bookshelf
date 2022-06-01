@@ -35,7 +35,7 @@ export default function Navbar({ bgColor, tittleColor, image, user }) {
 
                 <div className=" sm_c:absolute sm_c:right-1 sm_c:top-0  md_c:right-14 cursor-pointer ">
                     <div>
-                        <button onClick={handleClick} type="button" class=" inline-flex sm_c:mt-5 sm_c:ml-20 border border-solid sm_c:ring-2 sm_c:ring-amber-600 border-romantic-1 sm_c:rounded-full" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                        <button onClick={handleClick} type="button" className=" inline-flex sm_c:mt-5 sm_c:ml-20 border border-solid sm_c:ring-2 sm_c:ring-amber-600 border-romantic-1 sm_c:rounded-full" id="menu-button" aria-expanded="true" aria-haspopup="true">
                             <img src="/images/coruja.png" width={40} className='sm_c:w-[40px] md_c:w-[60px] ' />
                         </button>
 

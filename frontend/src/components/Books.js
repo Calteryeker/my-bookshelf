@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import React from 'react';
 
-const Books = ({title, books, loading,css_componente,css_title, css_ul}) => {
+const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li}) => {
   if (loading || !books) {
     return <h2>Carregando...</h2>;
   }
@@ -9,17 +10,17 @@ const Books = ({title, books, loading,css_componente,css_title, css_ul}) => {
   return (
     <>
         <div className={css_componente}>
-          <h2 className={css_title}>{title}</h2>
+          <h3 className={css_title}>{title}</h3>
           <ul className={css_ul}>
           {books.map(book => (
-              <li key={book._id}>
-                  <Link href={`/book/${book._id}/view`} >
-                      <a className='list-group-item '>
-                          {book.titulo.toUpperCase()}
-                      </a>
-                  </Link>
-              </li>
-              
+              <Link href={`/book/${book._id}/view`}>
+                <a>
+                  <li key={book._id} className={css_li}> 
+                    {book.titulo.toUpperCase()}   
+                  </li>
+                </a>
+                
+              </Link>
           ))}
           </ul>
         </div>
