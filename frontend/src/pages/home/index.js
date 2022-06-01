@@ -16,7 +16,7 @@ export default function Index() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [currentLocalPage, setCurrentLocalPage] = useState(1);
-  const [booksPerPage, setBooksPerPage] = useState(1);
+  const [booksPerPage, setBooksPerPage] = useState(5);
 
   const [title, setTitle] = useState("Meus Livros:");
   const [books, setBooks] = useState([]);
