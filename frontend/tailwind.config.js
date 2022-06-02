@@ -22,8 +22,15 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
       },
       backgroundImage: {
+        '0': "url('/images/capa0.png')",
+        '1': "url('/images/capa1.png')",
+        '2': "url('/images/capa2.png')",
+        '3': "url('/images/capa3.png')",
+        '4': "url('/images/capa4.png')",
+        '5': "url('/images/capa5.png')",
         'section-logo-2': "url('/images/section2_fundo.png')",
         'signup-bg': "url('/images/bg_signup.png')",
+        'suport-icon': "url('/images/suporte-icon.png')"
       },
     },
   },

@@ -22,7 +22,7 @@ export default function BookEdit({book}) {
         title: yup.string().required("Campo Título é obrigatório!").max(60, "Título deve ter no máximo 60 caracteres!"),
         author: yup.string().required("Campo Autor é obrigatório!").max(50, "Autor deve ter no máximo 50 caracteres!"),
         year: yup.number().max(maxYear, `Ano máximo é ${maxYear}`).positive("Formato de ano inválido").required("Campo Ano é obrigatório!"),
-        description: yup.string().required("Descrição ou Resumo é obrigatório!").max(200, "Descrição não pode ter mais de 200 caracteres"),
+        description: yup.string().required("Descrição ou Resumo é obrigatório!").max(400, "Descrição não pode ter mais de 400 caracteres"),
         genres: yup.array().of(yup.string().max(15, "Tamanho máximo de 15 caracteres!").required("Gênero não pode ser vazio!")).min(1, "Um Gênero é obrigatório!"),
         rating: yup.number().max(5, "Avaliação deve ser menor que 5").positive("Avaliaçao deve ser um número positivo").required("Campo Avaliação é obrigatório!"),
 
@@ -78,50 +78,50 @@ export default function BookEdit({book}) {
 
     return (
         <>
-            <div className="pt-28 flex flex-col justify-between bg-signup-bg bg-no-repeat bg-cover min-h-screen bg-black">
+            <div className="pt-28 flex flex-col justify-between bg-signup-bg bg-no-repeat bg-cover min-h-screen">
                 <Head>
                     <title>MyBookshelf | Editar Livro</title>
                     <link rel="icon" href="/logo.png" />
                 </Head>
                 <Header title={"Editar Livro"}>
-                    <button onClick={handleReturn} className="rounded-xl left-0 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
+                    <button onClick={handleReturn} className="rounded-xl left-2 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
                 </Header>
                 <div className="flex flex-col items-center my-10 bg-white bg-opacity-80 rounded-2xl mx-auto w-96 pb-10 md_c:w-[500px] md_c:mx-auto md_c:mb-10">
                     <Formik initialValues={initialValues ? initialValues : {}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
-                        <Form className="items-center flex flex-col mt-10">
+                        <Form className="flex flex-col mt-10 w-[90%] items-center mx-5">
                             <img className="mx-auto" width={80} height={80} src="/images/logo_bg_brow.png" />
-                            <div className="mt-5">
-                                <label className="">
+                            <div className="mt-5 w-[95%]">
+                                <label className="items-center">
                                     <p>Título:</p>
-                                    <Field name="title" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Título do livro" />
+                                    <Field name="title" className="w-[100%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder="Título do livro" />
                                     <ErrorMessage component="p" name="title" className="text-xs text-red-700 text-center" />
                                 </label>
                             </div>
-                            <div className="">
-                                <label className="">
+                            <div className="w-[95%]">
+                                <label className="items-center">
                                     <p>Autor:</p>
-                                    <Field name="author" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Autor" />
+                                    <Field name="author" className="w-[100%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder="Autor" />
                                     <ErrorMessage component="p" name="author" className="text-xs text-red-700 text-center" />
                                 </label>
                             </div>
-                            <div className="">
-                                <label className="">
+                            <div className="w-[95%]">
+                                <label className="items-center">
                                     <p>Ano:</p>
-                                    <Field name="year" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Ano de Publicação" />
+                                    <Field name="year" className="w-[100%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder="Ano de Publicação" />
                                     <ErrorMessage component="p" name="year" className="text-xs text-red-700 text-center" />
                                 </label>
                             </div>
-                            <div className="">
-                                <label className="">
+                            <div className="w-[95%]">
+                                <label className="items-center">
                                     <p>Descrição:</p>
-                                    <Field as="textarea" name="description" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Descrição/Resumo" />
+                                    <Field as="textarea" name="description" className="w-[100%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder="Descrição/Resumo" />
                                     <ErrorMessage component="p" name="description" className="text-xs text-red-700 text-center" />
                                 </label>
                             </div>
-                            <div className="ml-5">
-                                <label className="">
+                            <div className="w-[95%]">
+                                <label className="items-center">
                                     <p>Gêneros:</p>
-                                    <FieldArray name="genres" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter">
+                                    <FieldArray name="genres" className="w-[100%] rounded-2xl py-3 border-brow_pod-1 border-2 font-inter">
                                         {fieldArrayProps => {
                                             const { remove, push, form} = fieldArrayProps;
                                             const { values } = form
@@ -129,8 +129,8 @@ export default function BookEdit({book}) {
                                             return (
                                                 <>
                                                     {genres.map((genre, index) => (
-                                                        <label key={index} className="block m-1">
-                                                            <Field name={`genres[${index}]`} className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder={`Gênero ${index+1}`} validate={(input) => validateGenre(input)}/>
+                                                        <label key={index} className="block">
+                                                            <Field name={`genres[${index}]`} className="mb-2 w-[96%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder={`Gênero ${index+1}`} validate={(input) => validateGenre(input)}/>
                                                             {index != 0 ? <button type="button" onClick={() => remove(index)}>-</button> : null}
                                                             {Object.keys(genres).length < 5 ? <button type="button" onClick={() => push('')}>+</button> : null}
                                                             <ErrorMessage component="p" name={`genres[${index}]`} className="text-xs text-red-700 text-center"></ErrorMessage>
@@ -142,10 +142,10 @@ export default function BookEdit({book}) {
                                     </FieldArray>
                                 </label>
                             </div>
-                            <div className="">
-                                <label className="">
+                            <div className="w-[95%]">
+                                <label className="items-center">
                                     <p>Avaliação:</p>
-                                    <Field name="rating" className="rounded-2xl py-3 border-brow_pod-1 border-2 pl-2 font-inter" placeholder="Avaliação (1-5)" />
+                                    <Field name="rating" className="w-[100%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder="Avaliação (1-5)" />
                                     <ErrorMessage component="p" name="rating" className="text-xs text-red-700 text-center" />
                                 </label>
                             </div>

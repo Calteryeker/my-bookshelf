@@ -63,20 +63,20 @@ export default function ProfileView() {
   
   (
     <>
-      <div className="bg-romantic-1 flex flex-col justify-content align-center min-h-screen">
+      <div className="pt-28 bg-section-logo-2 bg-romantic-1 flex flex-col justify-between align-center min-h-screen">
         <Head>
           <title>MyBookshelf | Meu Perfil</title>
           <link rel="icon" href="/logo.png" />
         </Head>
         <Header title={"Meu Perfil"}>
-          <button onClick={handleReturn} className="rounded-xl left-0 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
+          <button onClick={handleReturn} className="rounded-xl left-2 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
         </Header>
 
-        <div className="flex flex-col items-center mt-20 bg-white rounded-2xl mx-auto w-96 pb-10 md_c:w-[50vw]">
+        <div className="flex flex-col items-center my-10 sm:my-48 bg-white rounded-[50px] mx-auto w-96 sm:w-[600px] pb-10 md_c:w-[700px] md_c:mx-auto md_c:mb-10">
           <UserInfo user={user}/>
-          <div className="flex flex-row justify-center items-center">
-            <button className="inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-2 py-2 w-32 hover:bg-orange-500 duration-500 mr-1" type="button" onClick={handleClickEdit}>Editar Conta</button>
-            <button className="inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-2 py-2 w-32 hover:bg-orange-500 duration-500 ml-1" type="button" onClick={() => setShowModal(true)}>Excluir Conta</button>
+          <div className="flex flex-row justify-center items-center mt-5">
+            <button className="mx-5 inline rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-4 py-2 w-32 hover:bg-orange-500 hover:text-brow_pod-1 duration-500" type="button" onClick={handleClickEdit}>Editar Conta</button>
+            <button className="mx-5 inline rounded-xl bg-red-600 text-white font-luck text-xl px-4 py-2 w-32 hover:bg-[rgb(255,0,0)] duration-500" type="button" onClick={() => setShowModal(true)}>Excluir Conta</button>
           </div>
                       
           <Modal show={showModal} onClose={() => setShowModal(false)}>
@@ -100,8 +100,8 @@ export default function ProfileView() {
         </div>
         
           
-      </div>
       <Footer/>
+      </div>
     </>
   )
 }

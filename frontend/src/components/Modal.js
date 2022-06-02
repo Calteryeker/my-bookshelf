@@ -26,8 +26,8 @@ export default function Modal({show, textClose, onClose, textAction ,onAction, h
                 </div>
                 <div className="">
                     {children}
-                    <button className='rounded-xl bg-romantic-1 text-brow_pod-1 font-luck text-xl px-8 py-2 hover:bg-orange-500 hover:text-white duration-500' onClick={handleClose}>{textClose ? textClose : "Cancelar"}</button>
-                    {onAction ? <button className='rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-8 py-2 hover:bg-orange-500 hover:text-white duration-500' onClick={handleAction}>{textAction ? textAction : "Confirmar"}</button> : null}
+                    <button className='rounded-xl bg-romantic-1 text-brow_pod-1 font-luck text-xl px-8 py-2 mx-2 hover:bg-amber-600 hover:text-white duration-500' onClick={handleClose}>{textClose ? textClose : "Cancelar"}</button>
+                    {onAction ? <button className='rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-8 py-2 mx-2 hover:bg-orange-500 hover:text-white duration-500' onClick={handleAction}>{textAction ? textAction : "Confirmar"}</button> : null}
                 </div>
             </div>
         </div>
