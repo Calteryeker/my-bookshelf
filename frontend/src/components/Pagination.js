@@ -15,7 +15,7 @@ const Pagination = ({ currentPage, booksPerPage, totalBooks, paginate }) => {
 
   return (
     <nav className='flex justify-center text-white font-lekton text-[1.1em] md_c:text-[1.2em]'>
-      <ul className='flex flex-row '>
+      <ul className='flex flex-row bg-amber-800 rounded-md text py-2 px-4 w-full justify-center font-extrabold'>
         {
           pageNumbersBefore.length > 1 ? 
           <li className='mx-1 hover:underline'>
@@ -31,7 +31,7 @@ const Pagination = ({ currentPage, booksPerPage, totalBooks, paginate }) => {
             </button>
           </li>
         ))}
-        <li key={currentPage} className={'mx-1 border border-brow_pod-1 bg-romantic-1 px-2 text-brow_pod-1'}>
+        <li key={currentPage} className={'mx-1 font-extrabold rounded-md border border-brow_pod-1 bg-romantic-1 px-3 text-brow_pod-1'}>
           {currentPage}
         </li>
         {pageNumbersAfter.map(number => ( 

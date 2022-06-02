@@ -2,10 +2,17 @@ import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
 
-const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li}) => {
+const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li, sort_bg}) => {
   if (loading || !books) {
     return <h2>Carregando...</h2>;
   }
+
+  function sortBackground(){
+    var value = Math.floor(Math.random() * (6 - 0));
+    return value;
+  }
+
+  var numberp = 0;
 
   return (
     <>
@@ -15,7 +22,7 @@ const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li})
           {books.map(book => (
               <Link key={book._id} href={`/book/${book._id}/view`}>
                 <a key={book._id}>
-                  <li key={book._id} className={css_li}> 
+                  <li key={book._id} className={ sort_bg ? css_li + " bg-" + sortBackground().toString()  : css_li} > 
                     {book.titulo.toUpperCase()}   
                   </li>
                 </a>

@@ -172,6 +172,7 @@ export default function Index() {
     setFiltering(false)
   }
 
+
   return (
     <>
       
@@ -183,32 +184,36 @@ export default function Index() {
 
       <div className=" sm_c:pt-0 flex sm_c:flex-col sm_c:min-h-screen sm_c:items-center sm_c:justify-around sm_c:bg-romantic-1 overflow-hidden sm_c:mt-20 md_c:items-start md_c:flex-row md_c:justify-start md_c:bg-white" >
         <div className=" bg-romantic-1 md_c:flex md_c:flex-col md_c:align-top md_c:bg-white md_c:pt-20 md_c:w-[20%] md_c:min-h-screen ">
-          <div className="flex flex-row justify-start text-brow_pod-1 border border-orange-800 mx-9 rounded-lg py-3 ml-7 px-5 bg-romantic-1 text-[0.8em] hover:bg-green-700 hover:text-white cursor-pointer" onClick={() => Router.push('book/create')}>
+          <div className="md_c:hover:-translate-y-1 md_c:hover:scale-110 md_c:duration-300 flex flex-row justify-start text-brow_pod-1 border border-orange-800 mx-9 rounded-lg py-3 ml-7 px-5 bg-romantic-1 text-[0.8em] hover:bg-green-700 hover:text-white cursor-pointer" onClick={() => Router.push('book/create')}>
             <img src="/images/plus.png" className='sm_c:hidden md_c:block  w-7 h-7' />
             <Link href="book/create"><button className="sm_c:hidden md_c:block md_c:mx-1 md_c:font-luck ">Novo Livro</button></Link>
           </div>
-          <FilterStates status={"sm_c:hidden md_c:block md_c:font-luck"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
-          <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded} css_componente={"sm_c:mt-14 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-6 sm_c:bg-brow_pod-1 md_c:shadow-lg md_c:shadow-brow_pod-1 md_c:bg-white md_c:w-[90%] md_c:mx-2 "} css_title={"sm_c:mb-2 sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-xl md_c:text-brow_pod-1 md_c:mx-5"} css_ul={"sm_c:text-romantic-1 sm_c:font-inter md_c:text-sm md_c:font-bold md_c:text-brow_pod-1 md_c:leading-loose"} css_li={'hover:underline'}/>
+          <FilterStates status={"sm_c:hidden md_c:block md_c:font-luck "} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
+          <Books title={"Últimos Livros Cadastrados"} books={lastBooksAdded} 
+          css_componente={"border-8 sm_c:mt-14 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-6 sm_c:bg-brow_pod-1 md_c:shadow-lg md_c:shadow-brow_pod-1 md_c:bg-white md_c:w-[90%] md_c:mx-2 "} 
+          css_title={"sm_c:mb-2 sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-lg md_c:text-left md_c:text-brow_pod-1"} 
+          css_ul={"sm_c:pl-5 sm_c:text-romantic-1 sm_c:font-inter md_c:text-sm md_c:font-bold md_c:text-brow_pod-1 md_c:leading-loose list-decimal"} 
+          css_li={'hover:underline'}/>
         </div>
         
         <div className=" md_c:min-h-screen  md_c:w-full md_c:pt-16 flex flex-col bg-section-logo-2 bg-romantic-1">
           <p className="sm_c:hidden md_c:block flex flex-col mx-auto font-luck text-4xl text-brow_pod-1">Dashboard</p>
           <div className=" sm_c:font-luck sm_c:mx-auto sm_c:flex sm_c:flex-row sm_c:my-10  ">
-            <div className="sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-cyan-300 sm_c:hover:bg-sky-500  sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-6 md_c:mx-2 ">
+            <div className="transition hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-cyan-300 sm_c:hover:bg-sky-500  sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-6 md_c:mx-2 ">
               <h3 className="sm_c:text-lg md_c:text-3xl">Cadastrados</h3>
               <div className="sm_c:flex sm_c:flex-row ">
                 <img src="/images/bookshelf.png" width={50} height={20} className="md_c:w-16" />
                 <p className="sm_c:text-5xl sm_c:mt-1 sm_c:ml-2 md_c:text-7xl">{books.length >= 10 ? books.length : `0` + books.length}</p>
               </div>
             </div>
-            <div className="sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-white sm_c:hover:bg-green-500 sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-10 md_c:mx-2">
+            <div className="hover:-translate-y-1 hover:scale-110  duration-300 sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-white sm_c:hover:bg-green-500 sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-10 md_c:mx-2">
               <h3 className="sm_c:text-lg md_c:text-3xl">Em leitura</h3>
               <div className="sm_c:flex sm_c:flex-row ">
                 <img src="/images/open_book.png" width={50} height={20} className="md_c:w-16" />
                 <p className="sm_c:text-5xl sm_c:mt-1 sm_c:ml-2 md_c:text-7xl">{books.filter(book => book.estado === 1).length >= 10 ? books.filter(book => book.estado === 1).length : `0` + books.filter(book => book.estado === 1).length }</p>
               </div>
             </div>
-            <div className="sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-yellow-200 sm_c:hover:bg-yellow-400 sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-6 md_c:mx-1">
+            <div className=" hover:-translate-y-1 hover:scale-110 duration-300 sm_c:shadow-lg sm_c:shadow-brow_pod-1 sm_c:mx-1 sm_c:px-1 sm_c:py-10 sm_c:bg-yellow-200 sm_c:hover:bg-yellow-400 sm_c:flex sm_c:flex-col sm_c:text-brow_pod-1 sm_c:rounded-md md_c:px-6 md_c:mx-1">
               <h3 className="sm_c:text-lg md_c:text-3xl">Finalizados</h3>
               <div className="sm_c:flex sm_c:flex-row ">
                 <img src="/images/livros.png" width={50} height={20} className="md_c:w-16" />
@@ -219,7 +224,7 @@ export default function Index() {
           </div>
 
           <div className="sm_c:mx-auto sm_c:w-[370px] sm_c:mb-10 sm_c:py-4 sm_c:bg-brow_pod-1 sm_c:rounded-md sm_c:px-1 md_c:py-14 md_c:flex md_c:flex-col md_c:w-[750px] md_c:ml-auto md_c:rounded-2xl">
-            <h3 className="font-luck text-white sm_c:flex sm_c:justify-center md_c:justify-start md_c:hidden">Filtros</h3>
+            <h3 className="font-luck text-white sm_c:flex sm_c:justify-center   md_c:text-3xl">Filtros</h3>
             <div className="sm_c:px-2 sm_c:py-5 sm_c:bg-romantic-1 sm_c:rounded-md md_c:rounded-3xl md_c:align-top md_c:flex md_c:justify-center md_c:text-2xl md_c:mx-6 md_c:my-6 ">
               <Formik initialValues={{ picked: "0" }} >
                 {({ values }) => (
@@ -263,7 +268,11 @@ export default function Index() {
               
             </div>
             <FilterStates status={"md_c:hidden"} myBooks={myBooks} filterReading={filterReading} filterFinished={filterFinished} />
-            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} css_componente={"sm_c:mt-8 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1"} css_title={"sm_c:text-2xl sm_c:font-luck sm_c:text-white md_c:text-[2em]"} css_ul={'flex flex-row mt-5 mx-3 font-luck sm_c:overflow-x-auto md_c:w-[42em]'} css_li={"hover:underline hover:decoration-red-700 hover:bg-romantic-1 hover:border-red-700 hover:text-brow_pod-1 border border-[3px] border-romantic-1 p-[1rem] text-white text-center items-center place-content-center h-[11em] w-[7.9em] sm_c:text-[1rem] sm_c:mx-1 "}/>
+            <Books title={title} books={filteredBooks ? currentFilteredBooks : currentBooks} loading={loading} 
+            css_componente={"sm_c:mt-8 sm_c:w-[350px] sm_c:shadow-sm sm_c:shadow-brow_pod-1 sm_c:rounded-xl sm_c:px-5 sm_c:py-7 sm_c:bg-brow_pod-1 sm_c:text-romantic-1  md_c:w-full"} 
+            css_title={" sm_c:text-2xl sm_c:flex sm_c:justify-center sm_c:font-luck sm_c:text-white md_c:text-[2em] "} css_ul={'flex flex-row mt-5 mx-3 font-luck sm_c:overflow-x-auto md_c:w-[42em]'} 
+            sort_bg ={true}
+            css_li={"hover:-translate-y-1 hover:scale-100 duration-300 hover:underline hover:decoration-red-700  hover:text-white bg-cover p-[1rem] text-white text-center items-center place-content-center h-[11em] w-[7.9em] sm_c:text-[1rem] sm_c:mx-1 " }/>
             <Pagination currentPage={currentLocalPage} booksPerPage={booksPerPage} totalBooks={filteredBooks ? filteredBooks.length : books.length} paginate={paginate} />
           </div>
         </div>

@@ -24,10 +24,10 @@ export default function Navbar({ bgColor, tittleColor, image, user }) {
 
     let [open, setOpen] = useState(false);
     return (
-        <div className='shadow-md w-full fixed top-0 left-0'>
+        <div className='shadow-md w-full fixed z-50 top-0 left-0'>
             <div className={switchBgColor + ' md_c:flex items-center justify-between sm_c:py-4 sm_c:px-7 md_c:px-10 md_c:py-6'}>
                 <div className='font-bold text-2xl cursor-pointer items-center font-[Poppins] text-gray-800'>
-                    <a href="/" className="flex items-center">
+                    <a href="/home" className="flex items-center">
                         <Image src={switchImage} width={80} height={78} className={switchBgColor} />
                         <span className={` self-center text-[26px] sm_c:text-[30px] font-luck whitespace-nowrap ` + switchtittleColor}>My Bookshelf</span>
                     </a>
