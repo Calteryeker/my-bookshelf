@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-export default function Modal({show, onClose, onAction, children}){
+export default function Modal({show, textClose, onClose, textAction ,onAction, header, children}){
     const [isBrowser, setIsBrowser] = useState(false);
 
     useEffect(() =>{
@@ -19,15 +19,15 @@ export default function Modal({show, onClose, onAction, children}){
     }
 
     const modalContent = show ? (
-        <div className='overlay'>
-            <div className='modal'>
+        <div className="flex items-center justify-center fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-90" >
+            <div className="flex flex-col rounded-xl items-center justify-center bg-white text-center sm:p-6 sm:pb-4 md_c:items-end h-[50%]">
                 <div className='header'>
-                    <h2>Confirme a Operação</h2>
+                    {header}
                 </div>
-                <div>
+                <div className="">
                     {children}
-                    <a href='#' onClick={handleClose}><button >Cancelar</button></a>
-                    {onAction ? <a href='#' onClick={handleAction}><button >Confirmar</button></a> : null}
+                    <button className='rounded-xl bg-romantic-1 text-brow_pod-1 font-luck text-xl px-8 py-2 mx-2 hover:bg-amber-600 hover:text-white duration-500' onClick={handleClose}>{textClose ? textClose : "Cancelar"}</button>
+                    {onAction ? <button className='rounded-xl bg-brow_pod-1 text-white font-luck text-xl px-8 py-2 mx-2 hover:bg-orange-500 hover:text-white duration-500' onClick={handleAction}>{textAction ? textAction : "Confirmar"}</button> : null}
                 </div>
             </div>
         </div>

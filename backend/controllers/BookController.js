@@ -13,7 +13,8 @@ module.exports = {
                         ano_publicacao: ano_publicacao,
                         descricao: descricao, 
                         lista_generos: lista_generos,
-                        avaliacao: avaliacao
+                        avaliacao: avaliacao,
+                        estado: 0
                     }
                 }
             }).then((result) => {
@@ -50,6 +51,23 @@ module.exports = {
                 "lista_livros.$.descricao": descricao,
                 "lista_livros.$.lista_generos": lista_generos,
                 "lista_livros.$.avaliacao": avaliacao,
+            }
+        }).catch(err => {
+            return res.status(500).send("Error: Failed to update the book!")});
+
+        return res.status(200).send("Success: Book updated!");
+    },
+
+    async updateState(req, res){
+        const novo_estado = req.query.new_state;
+
+        if (novo_estado < 0 || novo_estado > 2){
+            return res.status(400).send("Error: New State Value is invalid!");
+        }
+        await User.updateOne({_id: req.userId, "lista_livros._id": req.params.id},
+        {
+            $set: {
+                "lista_livros.$.estado": novo_estado,
             }
         }).catch(err => {
             return res.status(500).send("Error: Failed to update the book!")});

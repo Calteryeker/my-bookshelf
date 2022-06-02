@@ -13,4 +13,4 @@ app.use(cors());
 app.use(routes);
 
 //inicia o servidor
-app.listen(3030);
+app.listen(process.env.PORT || 3030);

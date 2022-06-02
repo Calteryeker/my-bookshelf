@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
 module.exports = {
@@ -46,7 +45,6 @@ module.exports = {
         return res.status(401).send({err: 'Error: Password doesnt match!'})
       }
     }
-
     User.updateOne({_id: req.userId}, {senha: senhaHash, 
       nome: nome, email: email, data_nascimento: moment(data_nascimento, "DD/MM/YYYY")._d})
       .then( result => {
@@ -83,5 +81,21 @@ module.exports = {
     }
       
       return res.status(404).send("Error: User not found!")
-  }
+  },
+
+  async testLogin(req, res){
+    const {login} = req.body;
+    if(!await User.findOne({login : login})){
+      return res.status(200).send()
+    }
+    return res.status(409).send()
+  },
+
+  async testEmail(req, res){
+    const {email} = req.body;
+    if(!await User.findOne({email : email})){
+      return res.status(200).send()
+    }
+    return res.status(409).send()
+  },
 };
