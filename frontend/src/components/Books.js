@@ -8,7 +8,7 @@ const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li, 
   }
 
   function sortBackground(){
-    var value = Math.floor(Math.random() * (6 - 0));
+    var value = (Math.floor(Math.random() * (6 - 0)));
     return value;
   }
 
@@ -17,12 +17,13 @@ const Books = ({title, books, loading,css_componente,css_title, css_ul, css_li, 
   return (
     <>
         <div className={css_componente}>
+          <div className='bg-0 bg-1 bg-2 bg-3 bg-4 bg-5'></div>
           <h3 className={css_title}>{title}</h3>
           <ul className={css_ul}>
           {books.map(book => (
               <Link key={book._id} href={`/book/${book._id}/view`}>
                 <a key={book._id}>
-                  <li key={book._id} className={ sort_bg ? css_li + " bg-" + sortBackground().toString()  : css_li} > 
+                  <li key={book._id} className={ sort_bg ? css_li + " bg-" + (Math.floor(Math.random() * (6 - 0))).toString()  : css_li} > 
                     {book.titulo.toUpperCase()}   
                   </li>
                 </a>

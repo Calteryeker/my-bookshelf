@@ -115,7 +115,7 @@ export default function BookCreate() {
                                                 <>
                                                     {genres.map((genre, index) => (
                                                         <label key={index} className="block m-1">
-                                                            <Field name={`genres[${index}]`} className="mb-2 w-[95%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder={`Gênero ${index+1}`}/>
+                                                            <Field name={`genres[${index}]`} className="mb-2 w-[94%] rounded-2xl py-3 border-brow_pod-1 border-2 px-2 font-inter" placeholder={`Gênero ${index+1}`}/>
                                                             {index != 0 ? <button type="button" onClick={() => remove(index)}>-</button> : null}
                                                             {Object.keys(genres).length < 5 ? <button type="button" onClick={() => push('')}>+</button> : null}
                                                         </label>

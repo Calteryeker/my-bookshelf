@@ -47,9 +47,9 @@ export default function Navbar({ bgColor, tittleColor, image, user }) {
                     {showOptions && (
                         <div className=" divide-y divide-gray-100 absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-brow_pod-1 ring-opacity-5 focus:outline-none " role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div className="py-1 ">
-                                <a href="/profile/view" className="text-brow_pod-1 block px-4 py-2 text-sm hover:bg-romantic-1 hover:text-brow_pod-1" >Meu Perfil</a>
-                                <a href="/suport" className="text-brow_pod-1  block px-4 py-2 text-sm hover:bg-romantic-1 hover:text-brow_pod-1">Suporte</a>
-                                <a onClick={handleLogout} className=" text-brow_pod-1  block px-4 py-2 text-sm hover:bg-romantic-1 hover:text-brow_pod-1">Sair</a>
+                                <a href="/profile/view" className="text-brow_pod-1 block px-4 py-2 text-sm hover:bg-gray-200 hover:text-brow_pod-1" >Meu Perfil</a>
+                                <a href="/suport" className="text-brow_pod-1  block px-4 py-2 text-sm hover:bg-gray-200 hover:text-brow_pod-1">Suporte</a>
+                                <a onClick={handleLogout} className=" text-brow_pod-1  block px-4 py-2 text-sm hover:bg-gray-200 hover:text-brow_pod-1">Sair</a>
                             </div>
                             <div className="py-1 md_c:hidden">
                                 <a href="book/create" className="text-brow_pod-1 block px-4 py-2 text-sm hover:bg-romantic-1 hover:text-brow_pod-1"><button>Adicionar Livro</button></a>
