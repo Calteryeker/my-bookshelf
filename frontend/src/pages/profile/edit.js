@@ -200,8 +200,8 @@ export default function AccountEdit() {
           <title>MyBookshelf | Editar Perfil</title>
           <link rel="icon" href="/logo.png" />
         </Head>
-        <Header title={"Editar Informações"}>
-          <button onClick={handleReturn} className="rounded-xl left-0 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
+        <Header title={"Editar"}>
+          <button onClick={handleReturn} className="rounded-xl left-2 md:left-10 fixed text-left text-base hover:bg-orange-500 hover:text-white duration-500 p-2 bg-romantic-1 text-brow_pod-1">Retornar</button>
         </Header>
         <div className="flex flex-col items-center my-10 bg-white rounded-2xl mx-auto w-96 pb-10 md_c:w-[500px] md_c:mx-auto md_c:mb-10">
           <Formik initialValues={{name: user.nome, email: user.email, actual_password: '', new_password : '', confirmPassword: '', birthdate: moment(user.data_nascimento).toDate()}} onSubmit={handleClickEdit} validationSchema={validationEdit}>
